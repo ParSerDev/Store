@@ -1,0 +1,30 @@
+package com.parserdev.store.data.utils
+
+import com.parserdev.store.domain.network.NetworkResult
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import retrofit2.HttpException
+import retrofit2.Response
+import java.io.IOException
+
+suspend fun <T> safeApiCall(apiToBeCalled: suspend () -> Response<T>): NetworkResult<T> {
+
+    return withContext(Dispatchers.IO) {
+        try {
+            val response: Response<T> = apiToBeCalled()
+
+            if (response.isSuccessful) NetworkResult.Success(data = response.body()!!)
+            else NetworkResult.Error(message = response.message() ?: SOMETHING_WENT_WRONG)
+
+        } catch (e: HttpException) {
+            NetworkResult.Error(message = e.message ?: SOMETHING_WENT_WRONG)
+        } catch (e: IOException) {
+            NetworkResult.Error(message = NO_CONNECTION)
+        } catch (e: Exception) {
+            NetworkResult.Error(message = SOMETHING_WENT_WRONG)
+        }
+    }
+}
+
+const val SOMETHING_WENT_WRONG = "Something went wrong"
+const val NO_CONNECTION = "Please check your network connection"

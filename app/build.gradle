@@ -1,0 +1,64 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'androidx.navigation.safeargs.kotlin'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+}
+
+android {
+    namespace 'com.parserdev.store'
+    compileSdk 33
+
+    defaultConfig {
+        applicationId "com.parserdev.store"
+        minSdk 30
+        targetSdk 33
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+
+
+    dataBinding {
+        enabled = true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+        freeCompilerArgs += ["-Xopt-in=kotlin.RequiresOptIn"]
+    }
+}
+
+dependencies {
+    //project
+    implementation project(':data')
+    implementation project(':features:home')
+    implementation project(':features:cart')
+    implementation project(':base:ui-components')
+    //libraries
+    implementation libs.core.ktx
+    implementation libs.core.splashscreen
+    implementation libs.appcompat
+    implementation libs.constraintlayout
+    implementation libs.dagger
+    kapt libs.dagger.compiler
+    implementation 'androidx.viewpager2:viewpager2:1.0.0'
+    kaptTest "androidx.databinding:databinding-compiler:7.3.1"
+    //bundles
+    implementation libs.bundles.navigation
+}

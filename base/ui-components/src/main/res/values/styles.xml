@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="SpinnerTheme" parent="Widget.AppCompat.Light.DropDownItem.Spinner">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="android:minWidth">48dp</item>
+        <item name="android:background">@drawable/spinner_background</item>
+        <item name="android:spinnerMode">dropdown</item>
+    </style>
+
+    <style name="TouchRipple">
+        <item name="android:layout_width">48dp</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:background">@drawable/ripple_primary</item>
+    </style>
+
+    <style name="Filter">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:background">@drawable/ic_filter</item>
+    </style>
+
+    <style name="LocationPointer">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:background">@drawable/ic_location_pointer</item>
+    </style>
+
+    <style name="Text" parent="Theme.Store">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:fontFamily">@font/mark_pro_medium</item>
+        <item name="android:textColor">?android:attr/textColorSecondary</item>
+
+    </style>
+
+    <style name="Text.Title">
+        <item name="android:textSize">25sp</item>
+        <item name="android:textFontWeight">700</item>
+        <item name="android:letterSpacing">-0.01</item>
+        <item name="lineHeight">31.69sp</item>
+    </style>
+
+    <style name="Text.Spinner">
+        <item name="android:textFontWeight">500</item>
+        <item name="android:letterSpacing">-0.02</item>
+        <item name="lineHeight">19.01sp</item>
+    </style>
+
+    <style name="Text.Clickable">
+        <item name="android:textFontWeight">400</item>
+        <item name="android:letterSpacing">-0.02</item>
+        <item name="lineHeight">19.01sp</item>
+        <item name="android:fontFamily">@font/mark_pro</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+    </style>
+
+    <style name="Text.Category">
+        <item name="android:textAlignment">center</item>
+        <item name="android:textFontWeight">500</item>
+        <item name="android:letterSpacing">-0.03</item>
+        <item name="lineHeight">15.21sp</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+    <style name="Text.Hint">
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:fontFamily">@font/mark_pro</item>
+        <item name="android:textFontWeight">400</item>
+        <item name="android:letterSpacing">-0.03</item>
+        <item name="lineHeight">15.21sp</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+</resources>

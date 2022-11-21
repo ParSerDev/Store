@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="textFontColor" format="reference|color" />
+    <attr name="clickableTextFontColor" format="reference|color" />
+    <attr name="selectCategoryIconInactiveColor" format="reference|color" />
+    <attr name="selectCategoryIconActiveColor" format="reference|color" />
+    <attr name="detailsIconColor" format="reference|color" />
+    <attr name="cartButtonColor" format="reference|color" />
+    <attr name="editTextHintColor" format="reference|color" />
+</resources>

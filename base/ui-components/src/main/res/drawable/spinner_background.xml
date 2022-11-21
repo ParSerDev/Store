@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <layer-list>
+            <item>
+                <shape>
+                    <gradient android:angle="90" android:endColor="?android:attr/colorBackground" android:startColor="?android:attr/colorBackground" android:type="linear" />
+                </shape>
+            </item>
+            <item android:gravity="center_vertical|end" android:right="4dp" android:top="5dp">
+                <vector android:width="6dp" android:height="6dp" android:viewportWidth="6.0" android:viewportHeight="6.0">
+                    <path android:pathData="M 0.707107 1.0 L 5.0 5.29289" android:strokeWidth="1.0" android:strokeColor="#FFB3B3B3" android:strokeLineCap="round" android:strokeLineJoin="round" />
+                </vector>
+            </item>
+            <item android:gravity="center_vertical|end" android:left="4dp" android:top="5dp">
+                <vector android:width="6dp" android:height="6dp" android:viewportWidth="6.0" android:viewportHeight="6.0">
+                    <path android:pathData="M 1.0 5.29289 L 5.29289 1.0" android:strokeWidth="1.0" android:strokeColor="#FFB3B3B3" android:strokeLineCap="round" android:strokeLineJoin="round" />
+                </vector>
+            </item>
+        </layer-list>
+    </item>
+</selector>
