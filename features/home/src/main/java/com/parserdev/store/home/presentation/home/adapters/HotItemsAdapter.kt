@@ -31,7 +31,7 @@ class HotItemsAdapter(
             oldItem: HotItem,
             newItem: HotItem
         ): Boolean {
-            return oldItem == newItem
+            return oldItem.id == newItem.id
         }
     }
 

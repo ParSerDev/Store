@@ -7,35 +7,34 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.parserdev.store.domain.models.home.Category
-import com.parserdev.store.domain.models.home.HomeCategory
 import com.parserdev.store.home.databinding.ItemCategoryBinding
 
 class CategoriesAdapter(
     val categories: List<Category>,
-    val clickListener: (HomeCategory) -> Unit,
+    val clickListener: (Category) -> Unit,
     val marginLeft: Int,
     val marginRight: Int
 ) :
-    ListAdapter<HomeCategory, CategoriesAdapter.CategoriesViewHolder>(DiffCallBack()) {
+    ListAdapter<Category, CategoriesAdapter.CategoriesViewHolder>(DiffCallBack()) {
     private var selectedItemPosition: Int = 0
 
     class CategoriesViewHolder(
         val binding: ItemCategoryBinding
     ) : RecyclerView.ViewHolder(binding.root)
 
-    class DiffCallBack : DiffUtil.ItemCallback<HomeCategory>() {
+    class DiffCallBack : DiffUtil.ItemCallback<Category>() {
         override fun areItemsTheSame(
-            oldItem: HomeCategory,
-            newItem: HomeCategory
+            oldItem: Category,
+            newItem: Category
         ): Boolean {
             return oldItem == newItem
         }
 
         override fun areContentsTheSame(
-            oldItem: HomeCategory,
-            newItem: HomeCategory
+            oldItem: Category,
+            newItem: Category
         ): Boolean {
-            return oldItem == newItem
+            return oldItem.homeCategory == newItem.homeCategory
         }
     }
 

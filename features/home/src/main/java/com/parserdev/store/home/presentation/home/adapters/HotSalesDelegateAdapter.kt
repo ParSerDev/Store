@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import com.parserdev.store.domain.models.home.HotItem
-import com.parserdev.store.home.databinding.ItemHotSalesBinding
+import com.parserdev.store.home.databinding.ItemDelegateHotSalesBinding
 import com.parserdev.store.home.presentation.home.adapters.delegate.DelegateAdapter
 import com.parserdev.store.home.presentation.home.adapters.delegate.DelegateAdapterItem
 import com.parserdev.store.home.presentation.home.adapters.model.HotSalesItem
@@ -17,7 +17,7 @@ class HotSalesDelegateAdapter(private val clickListener: (HotItem) -> Unit) :
     ) {
     override fun createViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
         val binding =
-            ItemHotSalesBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemDelegateHotSalesBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return HotSalesViewHolder(
             binding = binding,
             clickListener = clickListener
@@ -33,7 +33,7 @@ class HotSalesDelegateAdapter(private val clickListener: (HotItem) -> Unit) :
     }
 
     class HotSalesViewHolder(
-        private val binding: ItemHotSalesBinding,
+        private val binding: ItemDelegateHotSalesBinding,
         private val clickListener: (HotItem) -> Unit
     ) :
         RecyclerView.ViewHolder(binding.root) {

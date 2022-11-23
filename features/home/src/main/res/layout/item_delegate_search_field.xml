@@ -10,15 +10,17 @@
         android:layout_height="34dp"
         android:layout_marginTop="35dp"
         android:layout_marginEnd="@dimen/margin_end"
+        android:contentDescription="@string/description_qr_code_background"
         android:background="@drawable/shape_rounded50dp_primary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/image_qr_code"
+        android:id="@+id/image_qr_code_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/ic_qr_code"
+        android:contentDescription="@string/description_qr_code_icon"
         app:layout_constraintBottom_toBottomOf="@id/image_qr_code_background"
         app:layout_constraintEnd_toEndOf="@id/image_qr_code_background"
         app:layout_constraintStart_toStartOf="@id/image_qr_code_background"

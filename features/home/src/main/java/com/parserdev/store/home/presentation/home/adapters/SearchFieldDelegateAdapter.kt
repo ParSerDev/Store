@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import androidx.recyclerview.widget.RecyclerView
-import com.parserdev.store.home.databinding.ItemSearchFieldBinding
+import com.parserdev.store.home.databinding.ItemDelegateSearchFieldBinding
 import com.parserdev.store.home.presentation.home.adapters.delegate.DelegateAdapter
 import com.parserdev.store.home.presentation.home.adapters.delegate.DelegateAdapterItem
 import com.parserdev.store.home.presentation.home.adapters.model.SearchFieldItem
@@ -16,7 +16,7 @@ class SearchFieldDelegateAdapter(private val editTextListener: (String) -> Unit)
     ) {
     override fun createViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
         val binding =
-            ItemSearchFieldBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemDelegateSearchFieldBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return SearchFieldViewHolder(binding, editTextListener)
     }
 
@@ -29,7 +29,7 @@ class SearchFieldDelegateAdapter(private val editTextListener: (String) -> Unit)
     }
 
     class SearchFieldViewHolder(
-        private val binding: ItemSearchFieldBinding,
+        private val binding: ItemDelegateSearchFieldBinding,
         private val editTextListener: (String) -> Unit
     ) :
         RecyclerView.ViewHolder(binding.root) {
