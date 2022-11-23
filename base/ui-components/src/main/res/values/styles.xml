@@ -44,6 +44,21 @@
         <item name="lineHeight">31.69sp</item>
     </style>
 
+    <style name="Text.Price">
+        <item name="android:textFontWeight">700</item>
+        <item name="android:textSize">16sp</item>
+        <item name="lineHeight">20.28sp</item>
+        <item name="android:letterSpacing">-0.02</item>
+    </style>
+
+    <style name="Text.Price.Old">
+        <item name="android:textFontWeight">500</item>
+        <item name="android:textSize">10sp</item>
+        <item name="lineHeight">12.68sp</item>
+        <item name="android:letterSpacing">-0.03</item>
+        <item name="android:textColor">?android:attr/textColorHint</item>
+    </style>
+
     <style name="Text.Spinner">
         <item name="android:textFontWeight">500</item>
         <item name="android:letterSpacing">-0.02</item>
@@ -65,6 +80,7 @@
         <item name="lineHeight">15.21sp</item>
         <item name="android:textSize">12sp</item>
     </style>
+
     <style name="Text.Hint">
         <item name="android:textColor">?android:attr/textColorPrimary</item>
         <item name="android:fontFamily">@font/mark_pro</item>

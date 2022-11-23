@@ -16,6 +16,7 @@
         <item name="android:textColorPrimary">@color/orange_400</item>
         <item name="android:textColorSecondary">@color/blue_900</item>
         <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColorHint">@color/white_350</item>
         <item name="selectCategoryIconInactiveColor">@color/blue_100</item>
         <item name="selectCategoryIconActiveColor">@android:color/white</item>
         <item name="detailsIconColor">@color/white_400</item>

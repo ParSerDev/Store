@@ -22,7 +22,7 @@
         android:layout_height="27dp"
         android:layout_marginStart="25dp"
         android:layout_marginTop="14dp"
-        android:background="@drawable/shape_rounded50dp_primary"
+        android:background="@drawable/ripple_onprimary_shape_primary_rounded50dp"
         app:layout_constraintStart_toStartOf="@id/image_item_picture"
         app:layout_constraintTop_toTopOf="@id/image_item_picture">
         <TextView
@@ -63,7 +63,7 @@
         android:clickable="true"
         android:focusable="true"
         android:layout_marginBottom="26dp"
-        android:background="@drawable/shape_rounded5dp_onprimary"
+        android:background="@drawable/ripple_primary_shape_onprimary_rounded5dp"
         app:layout_constraintStart_toStartOf="@id/text_subtitle"
         app:layout_constraintBottom_toBottomOf="@id/image_item_picture">
         <TextView
