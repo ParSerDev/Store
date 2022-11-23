@@ -1,19 +1,17 @@
 package com.parserdev.store.home.presentation.home.adapters
 
-import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
-import androidx.viewpager2.widget.MarginPageTransformer
-import com.parserdev.store.domain.models.home.HomeCategory
+import com.parserdev.store.domain.models.home.HotItem
 import com.parserdev.store.home.databinding.ItemHotSalesBinding
 import com.parserdev.store.home.presentation.home.adapters.delegate.DelegateAdapter
 import com.parserdev.store.home.presentation.home.adapters.delegate.DelegateAdapterItem
 import com.parserdev.store.home.presentation.home.adapters.model.HotSalesItem
 import kotlin.math.abs
 
-class HotSalesDelegateAdapter(private val clickListener: (HomeCategory) -> Unit) :
+class HotSalesDelegateAdapter(private val clickListener: (HotItem) -> Unit) :
     DelegateAdapter<HotSalesItem, HotSalesDelegateAdapter.HotSalesViewHolder>(
         HotSalesItem::class.java
     ) {
@@ -36,7 +34,7 @@ class HotSalesDelegateAdapter(private val clickListener: (HomeCategory) -> Unit)
 
     class HotSalesViewHolder(
         private val binding: ItemHotSalesBinding,
-        private val clickListener: (HomeCategory) -> Unit
+        private val clickListener: (HotItem) -> Unit
     ) :
         RecyclerView.ViewHolder(binding.root) {
 

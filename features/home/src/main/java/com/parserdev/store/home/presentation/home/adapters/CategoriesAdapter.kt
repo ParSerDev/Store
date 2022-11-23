@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.view.ViewGroup.MarginLayoutParams
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.parserdev.store.domain.models.home.Category
 import com.parserdev.store.domain.models.home.HomeCategory
@@ -15,12 +16,11 @@ class CategoriesAdapter(
     val marginLeft: Int,
     val marginRight: Int
 ) :
-    RecyclerView.Adapter<CategoriesAdapter.CategoriesViewHolder>() {
+    ListAdapter<HomeCategory, CategoriesAdapter.CategoriesViewHolder>(DiffCallBack()) {
     private var selectedItemPosition: Int = 0
 
     class CategoriesViewHolder(
-        val binding: ItemCategoryBinding,
-        val clickListener: (HomeCategory) -> Unit
+        val binding: ItemCategoryBinding
     ) : RecyclerView.ViewHolder(binding.root)
 
     class DiffCallBack : DiffUtil.ItemCallback<HomeCategory>() {
@@ -43,7 +43,7 @@ class CategoriesAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoriesViewHolder {
         val binding = ItemCategoryBinding
             .inflate(LayoutInflater.from(parent.context), parent, false)
-        return CategoriesViewHolder(binding, clickListener)
+        return CategoriesViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: CategoriesViewHolder, position: Int) {
@@ -53,14 +53,14 @@ class CategoriesAdapter(
             val endPosition = categories.size - 1
             buttonCategory.setOnClickListener {
                 selectedItemPosition = adapterPosition
+                clickListener
                 notifyDataSetChanged()
             }
-            
-            when(adapterPosition) {
+            when (adapterPosition) {
                 startPosition -> (layout.layoutParams as MarginLayoutParams).leftMargin = marginLeft
                 endPosition -> (layout.layoutParams as MarginLayoutParams).rightMargin = marginRight
             }
-            when(selectedItemPosition) {
+            when (selectedItemPosition) {
                 adapterPosition -> {
                     buttonCategory.isClickable = false
                     val iconActive = categories[adapterPosition].iconActiveId
@@ -70,7 +70,7 @@ class CategoriesAdapter(
                     buttonCategory.setBackgroundResource(backgroundActive)
                     textName.setTextColor(textColorActive)
                 }
-                else ->  {
+                else -> {
                     buttonCategory.isClickable = true
                     val iconInactive = categories[adapterPosition].iconInactiveId
                     val backgroundInactive = categories[adapterPosition].backgroundInactiveId
@@ -80,9 +80,7 @@ class CategoriesAdapter(
                     textName.setTextColor(textColorInactive)
                 }
             }
-
-             textName.text = categories[adapterPosition].name
-
+            textName.text = categories[adapterPosition].name
         }
     }
 

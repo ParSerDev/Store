@@ -4,17 +4,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.parserdev.store.domain.models.home.HomeCategory
 import com.parserdev.store.domain.models.home.HotItem
 import com.parserdev.store.home.databinding.ItemHotBinding
 
 class HotItemsAdapter(
     val hotItems: List<HotItem>?,
-    val clickListener: (HomeCategory) -> Unit,
+    val clickListener: (HotItem) -> Unit,
 ) :
-    RecyclerView.Adapter<HotItemsAdapter.HotItemsViewHolder>() {
+    ListAdapter<HotItem, HotItemsAdapter.HotItemsViewHolder>(DiffCallBack()) {
     class HotItemsViewHolder(
         val binding: ItemHotBinding
     ) : RecyclerView.ViewHolder(binding.root)
