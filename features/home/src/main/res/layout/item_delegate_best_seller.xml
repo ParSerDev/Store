@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/text_title_best_seller"
+        style="@style/Text.Title"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="11dp"
+        android:text="@string/best_seller"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/text_clickable_see_more"
+        style="@style/Text.Clickable"
+        android:layout_marginEnd="33dp"
+        android:text="@string/see_more"
+        app:layout_constraintBottom_toBottomOf="@id/text_title_best_seller"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/text_title_best_seller" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_best_sellers"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:orientation="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_title_best_seller" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
