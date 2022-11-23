@@ -20,7 +20,7 @@
     <TextView
         android:id="@+id/text_clickable_view_all"
         style="@style/Text.Clickable"
-        android:layout_marginEnd="@dimen/margin_end"
+        android:layout_marginEnd="33dp"
         android:text="@string/view_all"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/text_title_select_category"

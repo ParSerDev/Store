@@ -44,7 +44,7 @@
         app:layout_constraintTop_toTopOf="@id/spinner" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_home"
+        android:id="@+id/recycler_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="vertical"

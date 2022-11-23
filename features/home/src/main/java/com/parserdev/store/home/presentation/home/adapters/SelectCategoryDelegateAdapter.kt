@@ -43,7 +43,6 @@ class SelectCategoryDelegateAdapter(
         private val marginRight: Int
     ) :
         RecyclerView.ViewHolder(binding.root) {
-
         fun bind(item: SelectCategoryItem) {
             val categoriesAdapter = CategoriesAdapter(
                 categories = item.categories,

@@ -51,7 +51,7 @@ class CategoriesAdapter(
             val adapterPosition = holder.adapterPosition
             val startPosition = 0
             val endPosition = categories.size - 1
-            layout.setOnClickListener {
+            buttonCategory.setOnClickListener {
                 selectedItemPosition = adapterPosition
                 notifyDataSetChanged()
             }
@@ -62,19 +62,21 @@ class CategoriesAdapter(
             }
             when(selectedItemPosition) {
                 adapterPosition -> {
+                    buttonCategory.isClickable = false
                     val iconActive = categories[adapterPosition].iconActiveId
                     val backgroundActive = categories[adapterPosition].backgroundActiveId
                     val textColorActive = categories[adapterPosition].textColorActiveId
-                    imageIcon.setImageResource(iconActive)
-                    imageBackground.setBackgroundResource(backgroundActive)
+                    imageCategoryIcon.setImageResource(iconActive)
+                    buttonCategory.setBackgroundResource(backgroundActive)
                     textName.setTextColor(textColorActive)
                 }
                 else ->  {
+                    buttonCategory.isClickable = true
                     val iconInactive = categories[adapterPosition].iconInactiveId
                     val backgroundInactive = categories[adapterPosition].backgroundInactiveId
                     val textColorInactive = categories[adapterPosition].textColorInactiveId
-                    imageIcon.setImageResource(iconInactive)
-                    imageBackground.setBackgroundResource(backgroundInactive)
+                    imageCategoryIcon.setImageResource(iconInactive)
+                    buttonCategory.setBackgroundResource(backgroundInactive)
                     textName.setTextColor(textColorInactive)
                 }
             }

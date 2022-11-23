@@ -5,13 +5,13 @@ import com.parserdev.store.domain.models.home.HomePage
 
 data class HomePageDto(
     @field:SerializedName("best_seller")
-    val bestSeller: List<BestSellerItemDto?>? = null,
+    val bestSeller: List<BestSellerItemDto>? = null,
 
     @field:SerializedName("home_store")
-    val homeStore: List<HomeStoreItemDto?>? = null
+    val homeStore: List<HotItemDto>? = null
 ) {
     fun mapToDomainModel() = HomePage(
-        bestSeller = bestSeller?.map { it?.mapToDomain() },
-        homeStore = homeStore?.map { it?.mapToDomainModel() }
+        bestSeller = bestSeller?.map { it.mapToDomain() },
+        hotItems = homeStore?.map { it.mapToDomainModel() }
     )
 }

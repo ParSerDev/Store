@@ -2,6 +2,8 @@ package com.parserdev.store.data.di.modules
 
 import com.parserdev.store.data.network.NetworkInstance
 import com.parserdev.store.data.network.retrofit.RetrofitInstance
+import com.parserdev.store.data.repository.home.HomeRepository
+import com.parserdev.store.data.repository.home.HomeRepositoryImpl
 import dagger.Binds
 import dagger.Module
 
@@ -9,4 +11,6 @@ import dagger.Module
 abstract class NetworkModule {
     @Binds
     abstract fun provideNetworkInstance(instance: RetrofitInstance): NetworkInstance
+    @Binds
+    abstract fun provideRepo(instance: HomeRepositoryImpl): HomeRepository
 }

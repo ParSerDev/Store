@@ -4,10 +4,10 @@ import com.parserdev.store.domain.models.home.HotItem
 import com.parserdev.store.home.presentation.home.adapters.delegate.DelegateAdapterItem
 
 data class HotSalesItem(
-    val items: List<HotItem>
+    val items: List<HotItem>?
 ) : DelegateAdapterItem {
     override fun id(): Any = HotSalesItem::class.toString()
-    override fun content(): Any = items
+    override fun content(): Any = items?:-1
     inner class HotSalesContent(val items: List<HotItem>) {
         override fun equals(other: Any?): Boolean {
             if (other is HotSalesContent) {

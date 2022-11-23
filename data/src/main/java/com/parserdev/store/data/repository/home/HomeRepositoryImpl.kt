@@ -1,32 +1,44 @@
 package com.parserdev.store.data.repository.home
 
 import com.parserdev.store.data.database.StoreDatabase
+import com.parserdev.store.data.dto.HomePageDto
 import com.parserdev.store.data.dto.home.FavouriteItemDto
 import com.parserdev.store.data.network.NetworkInstance
 import com.parserdev.store.data.utils.safeApiCall
 import com.parserdev.store.domain.models.home.HomeCategory
 import com.parserdev.store.domain.models.home.HomePage
 import com.parserdev.store.domain.network.NetworkResult
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class HomeRepositoryImpl @Inject constructor(
     private val networkInstance: NetworkInstance, private val database: StoreDatabase
 ) : HomeRepository {
 
-    override suspend fun getHomePage(homeCategory: HomeCategory): NetworkResult<HomePage?> {
-        return when (homeCategory) {
-            HomeCategory.PHONES -> when (val networkResult =
-                safeApiCall { networkInstance.homeService.getHomePageDto(url = PHONE_HOME_PAGE_URL) }) {
-                is NetworkResult.Success -> NetworkResult.Success(data = networkResult.data?.mapToDomainModel())
-                is NetworkResult.Error -> NetworkResult.Error(
-                    message = networkResult.message, data = networkResult.data?.mapToDomainModel()
-                )
-                is NetworkResult.Loading -> NetworkResult.Loading(data = networkResult.data?.mapToDomainModel())
+    override suspend fun getHomePage(homeCategory: HomeCategory): Flow<NetworkResult<HomePage?>> {
+        val networkResult =
+            safeApiCall { networkInstance.homeService.getHomePageDto(url = PHONE_HOME_PAGE_URL) }
+        return flow {
+            when (homeCategory) {
+                HomeCategory.PHONES -> when (networkResult) {
+                    is NetworkResult.Success -> emit(
+                        NetworkResult.Success(
+                            data = networkResult.data?.mapToDomainModel()
+                        )
+                    )
+                    is NetworkResult.Error -> emit(
+                        NetworkResult.Error(
+                            message = networkResult.message
+                        )
+                    )
+                    is NetworkResult.Loading -> emit(NetworkResult.Loading(data = networkResult.data?.mapToDomainModel()))
+                }
+                HomeCategory.COMPUTERS -> emit(NetworkResult.Error(message = NO_DATA))
+                HomeCategory.HEALTH -> emit(NetworkResult.Error(message = NO_DATA))
+                HomeCategory.BOOKS -> emit(NetworkResult.Error(message = NO_DATA))
+                HomeCategory.TOOLS -> emit(NetworkResult.Error(message = NO_DATA))
             }
-            HomeCategory.COMPUTERS -> NetworkResult.Error(message = NO_DATA)
-            HomeCategory.HEALTH -> NetworkResult.Error(message = NO_DATA)
-            HomeCategory.BOOKS -> NetworkResult.Error(message = NO_DATA)
-            HomeCategory.TOOLS -> NetworkResult.Error(message = NO_DATA)
         }
     }
 

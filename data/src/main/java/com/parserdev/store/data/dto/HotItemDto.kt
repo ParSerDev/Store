@@ -2,8 +2,9 @@ package com.parserdev.store.data.dto
 
 import com.google.gson.annotations.SerializedName
 import com.parserdev.store.domain.models.home.HomeStoreItem
+import com.parserdev.store.domain.models.home.HotItem
 
-data class HomeStoreItemDto(
+data class HotItemDto(
 
     @field:SerializedName("subtitle")
     val subtitle: String? = null,
@@ -23,5 +24,5 @@ data class HomeStoreItemDto(
     @field:SerializedName("is_new")
     val isNew: Boolean? = null
 ) {
-    fun mapToDomainModel() = HomeStoreItem(subtitle, id, title, picture, isBuy, isNew)
+    fun mapToDomainModel() = HotItem(subtitle, id, title, picture, isBuy, isNew)
 }

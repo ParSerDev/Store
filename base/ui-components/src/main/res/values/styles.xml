@@ -73,4 +73,42 @@
         <item name="lineHeight">15.21sp</item>
         <item name="android:textSize">12sp</item>
     </style>
+
+    <style name="Text.HotItem">
+        <item name="android:textColor">?android:attr/textColor</item>
+        <item name="android:fontFamily">@font/sf_pro_display_bold</item>
+        <item name="android:textFontWeight">700</item>
+    </style>
+
+    <style name="Text.HotItem.New">
+        <item name="lineHeight">11.93sp</item>
+        <item name="android:textSize">10sp</item>
+        <item name="android:letterSpacing">-0.03</item>
+    </style>
+
+    <style name="Text.HotItem.Title">
+        <item name="lineHeight">29.83sp</item>
+        <item name="android:textSize">25sp</item>
+    </style>
+
+    <style name="Text.HotItem.Subtitle">
+        <item name="android:fontFamily">@font/sf_pro_display_regular</item>
+        <item name="android:textFontWeight">400</item>
+        <item name="lineHeight">13.13sp</item>
+        <item name="android:textSize">11sp</item>
+        <item name="android:letterSpacing">-0.033</item>
+    </style>
+
+    <style name="Text.HotItem.Buy">
+        <item name="android:textColor">?android:attr/textColorSecondary</item>
+        <item name="android:textFontWeight">700</item>
+        <item name="lineHeight">13.13sp</item>
+        <item name="android:textSize">11sp</item>
+        <item name="android:letterSpacing">-0.03</item>
+    </style>
+
+    <style name="roundedImageView">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">10dp</item>
+    </style>
 </resources>

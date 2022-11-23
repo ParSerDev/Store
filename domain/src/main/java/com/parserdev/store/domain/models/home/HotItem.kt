@@ -7,4 +7,8 @@ class HotItem(
     val picture: String? = null,
     val isBuy: Boolean? = null,
     val isNew: Boolean? = null
-)
+) {
+    override fun equals(other: Any?): Boolean {
+        return super.equals(other)
+    }
+}

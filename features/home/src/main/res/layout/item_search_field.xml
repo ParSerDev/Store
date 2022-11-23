@@ -10,7 +10,7 @@
         android:layout_height="34dp"
         android:layout_marginTop="35dp"
         android:layout_marginEnd="@dimen/margin_end"
-        android:background="@drawable/shape_rounded_corners_primary"
+        android:background="@drawable/shape_rounded50dp_primary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

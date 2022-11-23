@@ -7,6 +7,8 @@
     <string name="hot_sales">Hot sales</string>
     <string name="view_all">view all</string>
     <string name="see_more">see more</string>
+    <string name="buy_now">Buy now!</string>
+    <string name="new_item">New</string>
     <string name="description_location_pointer">Location pointer</string>
     <string name="description_spinner">Location spinner</string>
     <string name="description_category_item">Category item</string>
