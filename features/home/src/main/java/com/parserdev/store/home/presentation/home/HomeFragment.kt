@@ -22,9 +22,9 @@ import com.parserdev.store.home.presentation.home.adapters.HotSalesDelegateAdapt
 import com.parserdev.store.home.presentation.home.adapters.SearchFieldDelegateAdapter
 import com.parserdev.store.home.presentation.home.adapters.SelectCategoryDelegateAdapter
 import com.parserdev.store.home.presentation.home.adapters.delegate.CompositeAdapter
-import com.parserdev.store.home.presentation.home.adapters.model.HotSalesItem
+import com.parserdev.store.home.presentation.home.adapters.model.HotSalesListItem
 import com.parserdev.store.home.presentation.home.adapters.model.SearchFieldItem
-import com.parserdev.store.home.presentation.home.adapters.model.SelectCategoryItem
+import com.parserdev.store.home.presentation.home.adapters.model.SelectCategoryListItem
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -92,11 +92,11 @@ class HomeFragment : Fragment() {
                         is NetworkResult.Success -> {
                             compositeAdapter.submitList(
                                 listOf(
-                                    SelectCategoryItem(
+                                    SelectCategoryListItem(
                                         categories = categories
                                     ),
                                     SearchFieldItem(),
-                                    HotSalesItem(
+                                    HotSalesListItem(
                                         items = page.data?.hotItems
                                     )
                                 )

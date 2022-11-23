@@ -8,12 +8,12 @@ import com.parserdev.store.domain.models.home.HotItem
 import com.parserdev.store.home.databinding.ItemDelegateHotSalesBinding
 import com.parserdev.store.home.presentation.home.adapters.delegate.DelegateAdapter
 import com.parserdev.store.home.presentation.home.adapters.delegate.DelegateAdapterItem
-import com.parserdev.store.home.presentation.home.adapters.model.HotSalesItem
+import com.parserdev.store.home.presentation.home.adapters.model.HotSalesListItem
 import kotlin.math.abs
 
 class HotSalesDelegateAdapter(private val clickListener: (HotItem) -> Unit) :
-    DelegateAdapter<HotSalesItem, HotSalesDelegateAdapter.HotSalesViewHolder>(
-        HotSalesItem::class.java
+    DelegateAdapter<HotSalesListItem, HotSalesDelegateAdapter.HotSalesViewHolder>(
+        HotSalesListItem::class.java
     ) {
     override fun createViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
         val binding =
@@ -25,7 +25,7 @@ class HotSalesDelegateAdapter(private val clickListener: (HotItem) -> Unit) :
     }
 
     override fun bindViewHolder(
-        model: HotSalesItem,
+        model: HotSalesListItem,
         viewHolder: HotSalesViewHolder,
         payloads: List<DelegateAdapterItem.Payloadable>
     ) {
@@ -38,7 +38,7 @@ class HotSalesDelegateAdapter(private val clickListener: (HotItem) -> Unit) :
     ) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: HotSalesItem) {
+        fun bind(item: HotSalesListItem) {
             binding.apply {
                 val hotItemsAdapter = HotItemsAdapter(
                     hotItems = item.items,

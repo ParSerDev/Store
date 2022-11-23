@@ -7,15 +7,15 @@ import com.parserdev.store.domain.models.home.Category
 import com.parserdev.store.home.databinding.ItemDelegateSelectCategoryBinding
 import com.parserdev.store.home.presentation.home.adapters.delegate.DelegateAdapter
 import com.parserdev.store.home.presentation.home.adapters.delegate.DelegateAdapterItem
-import com.parserdev.store.home.presentation.home.adapters.model.SelectCategoryItem
+import com.parserdev.store.home.presentation.home.adapters.model.SelectCategoryListItem
 
 class SelectCategoryDelegateAdapter(
     val clickListener: (Category) -> Unit,
     val marginLeft: Int,
     val marginRight: Int
 ) :
-    DelegateAdapter<SelectCategoryItem, SelectCategoryDelegateAdapter.SelectCategoryViewHolder>(
-        SelectCategoryItem::class.java
+    DelegateAdapter<SelectCategoryListItem, SelectCategoryDelegateAdapter.SelectCategoryViewHolder>(
+        SelectCategoryListItem::class.java
     ) {
     override fun createViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
         val binding =
@@ -29,7 +29,7 @@ class SelectCategoryDelegateAdapter(
     }
 
     override fun bindViewHolder(
-        model: SelectCategoryItem,
+        model: SelectCategoryListItem,
         viewHolder: SelectCategoryViewHolder,
         payloads: List<DelegateAdapterItem.Payloadable>
     ) {
@@ -43,7 +43,7 @@ class SelectCategoryDelegateAdapter(
         private val marginRight: Int
     ) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: SelectCategoryItem) {
+        fun bind(item: SelectCategoryListItem) {
             val categoriesAdapter = CategoriesAdapter(
                 categories = item.categories,
                 clickListener = clickListener,

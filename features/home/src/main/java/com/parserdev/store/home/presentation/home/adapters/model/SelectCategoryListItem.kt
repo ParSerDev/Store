@@ -3,10 +3,10 @@ package com.parserdev.store.home.presentation.home.adapters.model
 import com.parserdev.store.domain.models.home.Category
 import com.parserdev.store.home.presentation.home.adapters.delegate.DelegateAdapterItem
 
-data class SelectCategoryItem(
+data class SelectCategoryListItem(
     val categories: List<Category>
 ) : DelegateAdapterItem {
-    override fun id(): Any = SelectCategoryItem::class.toString()
+    override fun id(): Any = SelectCategoryListItem::class.toString()
     override fun content(): Any = categories
     inner class SelectCategoryContent(val name: String) {
         override fun equals(other: Any?): Boolean {
