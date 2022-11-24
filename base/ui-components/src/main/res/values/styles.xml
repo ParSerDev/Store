@@ -44,18 +44,25 @@
         <item name="lineHeight">31.69sp</item>
     </style>
 
-    <style name="Text.Price">
+    <style name="Text.BestSeller">
+        <item name="android:fontFamily">@font/mark_pro</item>
+        <item name="android:textFontWeight">400</item>
+        <item name="android:textSize">10sp</item>
+        <item name="lineHeight">12.68sp</item>
+        <item name="android:letterSpacing">-0.03</item>
+    </style>
+
+    <style name="Text.BestSeller.Price">
+        <item name="android:fontFamily">@font/mark_pro_medium</item>
         <item name="android:textFontWeight">700</item>
         <item name="android:textSize">16sp</item>
         <item name="lineHeight">20.28sp</item>
         <item name="android:letterSpacing">-0.02</item>
     </style>
 
-    <style name="Text.Price.Old">
+    <style name="Text.BestSeller.OldPrice">
+        <item name="android:fontFamily">@font/mark_pro_medium</item>
         <item name="android:textFontWeight">500</item>
-        <item name="android:textSize">10sp</item>
-        <item name="lineHeight">12.68sp</item>
-        <item name="android:letterSpacing">-0.03</item>
         <item name="android:textColor">?android:attr/textColorHint</item>
     </style>
 

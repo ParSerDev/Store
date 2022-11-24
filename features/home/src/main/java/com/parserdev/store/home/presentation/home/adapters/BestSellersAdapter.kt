@@ -1,5 +1,6 @@
 package com.parserdev.store.home.presentation.home.adapters
 
+import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.view.ViewGroup.MarginLayoutParams
@@ -11,6 +12,8 @@ import com.parserdev.store.data.dto.home.FavouriteItemDto
 import com.parserdev.store.domain.models.home.BestSellerItem
 import com.parserdev.store.home.databinding.ItemBestSellerBinding
 import com.parserdev.ui_components.R
+import java.text.NumberFormat
+import java.util.*
 
 class BestSellersAdapter(
     val bestSellers: List<BestSellerItem>?,
@@ -56,15 +59,23 @@ class BestSellersAdapter(
                     .centerCrop()
                     .into(imagePicture)
                 textTitle.text = bestSellers[adapterPosition].title
-                textPrice.text = bestSellers[adapterPosition].discountPrice.toString()
-                textOldPrice.text = bestSellers[adapterPosition].priceWithoutDiscount.toString()
-                when(bestSellers[adapterPosition].isFavorites) {
+                val format: NumberFormat = NumberFormat.getCurrencyInstance()
+                format.maximumFractionDigits = 0
+                format.currency = Currency.getInstance("USD")
+                textPrice.text =
+                    format.format(bestSellers[adapterPosition].discountPrice).toString()
+                textOldPrice.apply {
+                    paintFlags = paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+                    text =
+                        format.format(bestSellers[adapterPosition].priceWithoutDiscount).toString()
+                }
+                when (bestSellers[adapterPosition].isFavorites) {
                     true -> imageLike.setImageResource(R.drawable.ic_heart_primary_active)
-                    else ->  imageLike.setImageResource(R.drawable.ic_heart_primary_inactive)
+                    else -> imageLike.setImageResource(R.drawable.ic_heart_primary_inactive)
                 }
                 buttonLike.setOnClickListener { likeClickListener }
                 layout.setOnClickListener { navigationClickListener }
-                if(adapterPosition%2==0) {
+                if (adapterPosition % 2 == 0) {
                     (layout.layoutParams as MarginLayoutParams).leftMargin = marginLeft
                 } else {
                     (layout.layoutParams as MarginLayoutParams).rightMargin = marginRight
