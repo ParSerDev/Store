@@ -1,14 +1,14 @@
 package com.parserdev.store.home.presentation.home.adapters.model
 
-import com.parserdev.store.domain.models.home.Category
+import com.parserdev.store.domain.models.home.CategoryItem
 import com.parserdev.store.home.presentation.home.adapters.delegate.DelegateAdapterItem
 
 data class SelectCategoryListItem(
-    val categories: List<Category>
+    val categories: List<CategoryItem>
 ) : DelegateAdapterItem {
     override fun id(): Any = SelectCategoryListItem::class.toString()
     override fun content(): Any = categories
-    inner class SelectCategoryContent(val name: String) {
+    inner class SelectCategoryContent(private val name: String) {
         override fun equals(other: Any?): Boolean {
             if (other is SelectCategoryContent) {
                 return name == other.name

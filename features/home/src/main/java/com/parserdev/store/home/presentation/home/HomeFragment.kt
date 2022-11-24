@@ -11,7 +11,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import com.parserdev.store.domain.models.home.Category
+import com.parserdev.store.domain.models.home.CategoryItem
 import com.parserdev.store.domain.models.home.HomeCategory
 import com.parserdev.store.domain.network.NetworkResult
 import com.parserdev.ui_components.R
@@ -38,7 +38,7 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var compositeAdapter: CompositeAdapter
-    private lateinit var categories: List<Category>
+    private lateinit var categories: List<CategoryItem>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -136,7 +136,7 @@ class HomeFragment : Fragment() {
 
     private fun initCategories() {
         categories = listOf(
-            Category(
+            CategoryItem(
                 name = resources.getString(R.string.phones),
                 iconActiveId = R.drawable.ic_phone_active,
                 iconInactiveId = R.drawable.ic_phone_inactive,
@@ -146,7 +146,7 @@ class HomeFragment : Fragment() {
                 textColorInactiveId = requireContext().getColorFromAttr(android.R.attr.textColorSecondary),
                 homeCategory = HomeCategory.PHONES
             ),
-            Category(
+            CategoryItem(
                 name = resources.getString(R.string.computer),
                 iconActiveId = R.drawable.ic_computer_active,
                 iconInactiveId = R.drawable.ic_computer_inactive,
@@ -156,7 +156,7 @@ class HomeFragment : Fragment() {
                 textColorInactiveId = requireContext().getColorFromAttr(android.R.attr.textColorSecondary),
                 homeCategory = HomeCategory.COMPUTERS
             ),
-            Category(
+            CategoryItem(
                 name = resources.getString(R.string.health),
                 iconActiveId = R.drawable.ic_health_active,
                 iconInactiveId = R.drawable.ic_health_inactive,
@@ -166,7 +166,7 @@ class HomeFragment : Fragment() {
                 textColorInactiveId = requireContext().getColorFromAttr(android.R.attr.textColorSecondary),
                 homeCategory = HomeCategory.HEALTH
             ),
-            Category(
+            CategoryItem(
                 name = resources.getString(R.string.books),
                 iconActiveId = R.drawable.ic_books_active,
                 iconInactiveId = R.drawable.ic_books_inactive,
@@ -176,7 +176,7 @@ class HomeFragment : Fragment() {
                 textColorInactiveId = requireContext().getColorFromAttr(android.R.attr.textColorSecondary),
                 homeCategory = HomeCategory.BOOKS
             ),
-            Category(
+            CategoryItem(
                 name = resources.getString(R.string.tools),
                 iconActiveId = R.drawable.ic_tool_active,
                 iconInactiveId = R.drawable.ic_tool_inactive,

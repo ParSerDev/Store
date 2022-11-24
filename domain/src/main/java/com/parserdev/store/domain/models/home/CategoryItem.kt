@@ -1,6 +1,6 @@
 package com.parserdev.store.domain.models.home
 
-class Category(
+class CategoryItem(
     val name: String,
     val iconActiveId: Int,
     val iconInactiveId: Int,

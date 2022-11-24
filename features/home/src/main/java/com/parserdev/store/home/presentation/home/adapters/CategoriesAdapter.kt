@@ -6,33 +6,33 @@ import android.view.ViewGroup.MarginLayoutParams
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.parserdev.store.domain.models.home.Category
+import com.parserdev.store.domain.models.home.CategoryItem
 import com.parserdev.store.home.databinding.ItemCategoryBinding
 
 class CategoriesAdapter(
-    val categories: List<Category>,
-    val clickListener: (Category) -> Unit,
+    val categories: List<CategoryItem>,
+    val clickListener: (CategoryItem) -> Unit,
     val marginLeft: Int,
     val marginRight: Int
 ) :
-    ListAdapter<Category, CategoriesAdapter.CategoriesViewHolder>(DiffCallBack()) {
+    ListAdapter<CategoryItem, CategoriesAdapter.CategoriesViewHolder>(DiffCallBack()) {
     private var selectedItemPosition: Int = 0
 
     class CategoriesViewHolder(
         val binding: ItemCategoryBinding
     ) : RecyclerView.ViewHolder(binding.root)
 
-    class DiffCallBack : DiffUtil.ItemCallback<Category>() {
+    class DiffCallBack : DiffUtil.ItemCallback<CategoryItem>() {
         override fun areItemsTheSame(
-            oldItem: Category,
-            newItem: Category
+            oldItem: CategoryItem,
+            newItem: CategoryItem
         ): Boolean {
             return oldItem == newItem
         }
 
         override fun areContentsTheSame(
-            oldItem: Category,
-            newItem: Category
+            oldItem: CategoryItem,
+            newItem: CategoryItem
         ): Boolean {
             return oldItem.homeCategory == newItem.homeCategory
         }

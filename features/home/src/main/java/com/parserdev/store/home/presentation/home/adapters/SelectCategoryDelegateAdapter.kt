@@ -3,14 +3,14 @@ package com.parserdev.store.home.presentation.home.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.parserdev.store.domain.models.home.Category
+import com.parserdev.store.domain.models.home.CategoryItem
 import com.parserdev.store.home.databinding.ItemDelegateSelectCategoryBinding
 import com.parserdev.store.home.presentation.home.adapters.delegate.DelegateAdapter
 import com.parserdev.store.home.presentation.home.adapters.delegate.DelegateAdapterItem
 import com.parserdev.store.home.presentation.home.adapters.model.SelectCategoryListItem
 
 class SelectCategoryDelegateAdapter(
-    val clickListener: (Category) -> Unit,
+    val clickListener: (CategoryItem) -> Unit,
     val marginLeft: Int,
     val marginRight: Int
 ) :
@@ -38,7 +38,7 @@ class SelectCategoryDelegateAdapter(
 
     class SelectCategoryViewHolder(
         private val binding: ItemDelegateSelectCategoryBinding,
-        private val clickListener: (Category) -> Unit,
+        private val clickListener: (CategoryItem) -> Unit,
         private val marginLeft: Int,
         private val marginRight: Int
     ) :

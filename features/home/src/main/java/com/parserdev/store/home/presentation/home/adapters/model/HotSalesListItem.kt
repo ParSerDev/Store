@@ -8,7 +8,7 @@ data class HotSalesListItem(
 ) : DelegateAdapterItem {
     override fun id(): Any = HotSalesListItem::class.toString()
     override fun content(): Any = items?:-1
-    inner class HotSalesContent(val items: List<HotItem>) {
+    inner class HotSalesContent(private val items: List<HotItem>) {
         override fun equals(other: Any?): Boolean {
             if (other is HotSalesContent) {
                 return items == other.items
