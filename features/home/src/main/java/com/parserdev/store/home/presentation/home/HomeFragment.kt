@@ -11,6 +11,8 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.parserdev.store.domain.models.home.CategoryItem
 import com.parserdev.store.domain.models.home.HomeCategory
 import com.parserdev.store.domain.network.NetworkResult
@@ -18,10 +20,9 @@ import com.parserdev.ui_components.R
 import com.parserdev.store.home.databinding.FragmentHomeBinding
 import com.parserdev.store.home.di.HomeComponentProvider
 import com.parserdev.store.home.presentation.getColorFromAttr
-import com.parserdev.store.home.presentation.home.adapters.HotSalesDelegateAdapter
-import com.parserdev.store.home.presentation.home.adapters.SearchFieldDelegateAdapter
-import com.parserdev.store.home.presentation.home.adapters.SelectCategoryDelegateAdapter
+import com.parserdev.store.home.presentation.home.adapters.*
 import com.parserdev.store.home.presentation.home.adapters.delegate.CompositeAdapter
+import com.parserdev.store.home.presentation.home.adapters.model.BestSellersListItem
 import com.parserdev.store.home.presentation.home.adapters.model.HotSalesListItem
 import com.parserdev.store.home.presentation.home.adapters.model.SearchFieldItem
 import com.parserdev.store.home.presentation.home.adapters.model.SelectCategoryListItem
@@ -98,6 +99,9 @@ class HomeFragment : Fragment() {
                                     SearchFieldItem(),
                                     HotSalesListItem(
                                         items = page.data?.hotItems
+                                    ),
+                                    BestSellersListItem(
+                                        bestSellers = page.data?.bestSellers
                                     )
                                 )
                             )
@@ -110,27 +114,41 @@ class HomeFragment : Fragment() {
     }
 
     private fun initCompositeAdapter() {
-        val marginLeft = TypedValue.applyDimension(
-            TypedValue.COMPLEX_UNIT_DIP,
-            27F,
-            resources.displayMetrics
-        ).toInt()
-        val marginRight = TypedValue.applyDimension(
-            TypedValue.COMPLEX_UNIT_DIP,
-            27F,
-            resources.displayMetrics
-        ).toInt()
         val selectCategoryDelegateAdapter = SelectCategoryDelegateAdapter(
             clickListener = {},
-            marginRight = marginRight,
-            marginLeft = marginLeft
+            marginRight = TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP,
+                27F,
+                resources.displayMetrics
+            ).toInt(),
+            marginLeft = TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP,
+                27F,
+                resources.displayMetrics
+            ).toInt()
         )
         val searchFieldDelegateAdapter = SearchFieldDelegateAdapter(editTextListener = {})
         val hotSalesDelegateAdapter = HotSalesDelegateAdapter(clickListener = {})
+        val bestSellerDelegateAdapter = BestSellerDelegateAdapter(
+            likeClickListener = {},
+            navigationClickListener = {},
+            gridLayoutManager = GridLayoutManager(requireContext(), 2),
+            marginLeft = TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP,
+                17F,
+                resources.displayMetrics
+            ).toInt(),
+            marginRight = TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP,
+                21F,
+                resources.displayMetrics
+            ).toInt()
+        )
         compositeAdapter = CompositeAdapter.Builder()
             .add(selectCategoryDelegateAdapter)
             .add(searchFieldDelegateAdapter)
             .add(hotSalesDelegateAdapter)
+            .add(bestSellerDelegateAdapter)
             .build()
     }
 
