@@ -34,7 +34,14 @@
         <item name="android:textSize">15sp</item>
         <item name="android:fontFamily">@font/mark_pro_medium</item>
         <item name="android:textColor">?android:attr/textColorSecondary</item>
+    </style>
 
+    <style name="Text.BottomBar">
+        <item name="android:textColor">?android:attr/textColor</item>
+        <item name="android:textFontWeight">700</item>
+        <item name="lineHeight">19.01sp</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:letterSpacing">-0.02</item>
     </style>
 
     <style name="Text.Title">

@@ -49,9 +49,69 @@
         android:layout_height="0dp"
         android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintTop_toBottomOf="@id/spinner"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/layout_bottom_bar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/spinner" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_bottom_bar"
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:background="@drawable/shape_bottom_bar"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <View
+            android:id="@+id/dot"
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:layout_marginStart="68dp"
+            android:background="@drawable/ripple_primary_shape_onprimary_rounded50dp"
+            android:clickable="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/text_explorer"
+            style="@style/Text.BottomBar"
+            android:text="@string/explorer"
+            android:layout_marginStart="7dp"
+            android:layout_marginBottom="3dp"
+            app:layout_constraintTop_toTopOf="@id/dot"
+            app:layout_constraintBottom_toBottomOf="@id/dot"
+            app:layout_constraintStart_toEndOf="@id/dot"/>
+
+        <ImageView
+            android:id="@+id/image_cart_icon"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:background="@drawable/ic_cart"
+            android:layout_marginStart="113dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/dot"
+            />
+        <ImageView
+            android:id="@+id/image_like_icon"
+            android:layout_width="19dp"
+            android:layout_height="17dp"
+            android:background="@drawable/ic_heart_onsecondary_inactive"
+            android:layout_marginStart="183dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/dot"
+            />
+        <ImageView
+            android:id="@+id/image_profile_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_profile"
+            android:layout_marginStart="254dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/dot"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

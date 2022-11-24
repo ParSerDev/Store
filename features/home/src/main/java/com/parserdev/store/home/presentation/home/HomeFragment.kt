@@ -13,6 +13,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
+import androidx.transition.Fade
+import androidx.transition.Scene
+import androidx.transition.Transition
+import androidx.transition.TransitionManager
 import com.parserdev.store.domain.models.home.CategoryItem
 import com.parserdev.store.domain.models.home.HomeCategory
 import com.parserdev.store.domain.network.NetworkResult
@@ -60,6 +64,9 @@ class HomeFragment : Fragment() {
     private fun FragmentHomeBinding.bindState() {
         bindSpinner()
         bindRecyclerView()
+
+        binding.buttonFilter.setOnClickListener {
+        }
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.RESUMED) {
                 homeViewModel.accept(
