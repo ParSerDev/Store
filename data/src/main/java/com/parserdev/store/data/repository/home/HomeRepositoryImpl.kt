@@ -1,7 +1,6 @@
 package com.parserdev.store.data.repository.home
 
 import com.parserdev.store.data.database.StoreDatabase
-import com.parserdev.store.data.dto.HomePageDto
 import com.parserdev.store.data.dto.home.FavouriteItemDto
 import com.parserdev.store.data.network.NetworkInstance
 import com.parserdev.store.data.utils.safeApiCall

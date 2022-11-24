@@ -1,6 +1,6 @@
 package com.parserdev.store.data.network.retrofit
 
-import com.parserdev.store.data.dto.HomePageDto
+import com.parserdev.store.data.dto.home.HomePageDto
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path

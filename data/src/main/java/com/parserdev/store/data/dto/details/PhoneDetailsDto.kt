@@ -1,4 +1,4 @@
-package com.parserdev.store.data.dto
+package com.parserdev.store.data.dto.details
 
 import com.google.gson.annotations.SerializedName
 import com.parserdev.store.domain.models.details.PhoneDetails
