@@ -1,5 +1,6 @@
 package com.parserdev.store.home.presentation.home
 
+import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.util.TypedValue
 import android.view.LayoutInflater
@@ -12,15 +13,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView.LayoutManager
-import androidx.transition.Fade
-import androidx.transition.Scene
-import androidx.transition.Transition
-import androidx.transition.TransitionManager
 import com.parserdev.store.domain.models.home.CategoryItem
 import com.parserdev.store.domain.models.home.HomeCategory
 import com.parserdev.store.domain.network.NetworkResult
-import com.parserdev.ui_components.R
 import com.parserdev.store.home.databinding.FragmentHomeBinding
 import com.parserdev.store.home.di.HomeComponentProvider
 import com.parserdev.store.home.presentation.getColorFromAttr
@@ -30,8 +25,10 @@ import com.parserdev.store.home.presentation.home.adapters.model.BestSellersList
 import com.parserdev.store.home.presentation.home.adapters.model.HotSalesListItem
 import com.parserdev.store.home.presentation.home.adapters.model.SearchFieldItem
 import com.parserdev.store.home.presentation.home.adapters.model.SelectCategoryListItem
+import com.parserdev.ui_components.R
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+
 
 class HomeFragment : Fragment() {
 
@@ -62,10 +59,34 @@ class HomeFragment : Fragment() {
     }
 
     private fun FragmentHomeBinding.bindState() {
-        bindSpinner()
+        bindSpinners()
         bindRecyclerView()
 
+        binding.layoutBottomBar.bottomBar.setOnClickListener {  }
+        binding.cardFilter.filter.setOnClickListener {  }
         binding.buttonFilter.setOnClickListener {
+            ObjectAnimator.ofFloat(
+                binding.cardFilter.filter, "translationY", TypedValue.applyDimension(
+                    TypedValue.COMPLEX_UNIT_DIP,
+                    -375F,
+                    resources.displayMetrics
+                )
+            ).apply {
+                duration = 1000
+                start()
+            }
+        }
+        binding.cardFilter.buttonClose.setOnClickListener {
+            ObjectAnimator.ofFloat(
+                binding.cardFilter.filter, "translationY", TypedValue.applyDimension(
+                    TypedValue.COMPLEX_UNIT_DIP,
+                    375F,
+                    resources.displayMetrics
+                )
+            ).apply {
+                duration = 1000
+                start()
+            }
         }
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.RESUMED) {
@@ -78,15 +99,40 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun FragmentHomeBinding.bindSpinner() {
-        ArrayAdapter.createFromResource(
+    private fun FragmentHomeBinding.bindSpinners() {
+        ArrayAdapter(
             requireContext(),
-            R.array.locations_array,
-            R.layout.spinner_item
+            R.layout.spinner_item_location,
+            homeViewModel.locationsList
         ).also { adapter ->
-            adapter.setDropDownViewResource(R.layout.spinner_dropdown_item)
+            adapter.setDropDownViewResource(R.layout.spinner_dropdown_location)
             spinner.adapter = adapter
         }
+        ArrayAdapter(
+            requireContext(),
+            R.layout.spinner_item_filter,
+            homeViewModel.brandsList
+        ).also { adapter ->
+            adapter.setDropDownViewResource(R.layout.spinner_dropdown_filter)
+            cardFilter.spinnerBrand.adapter = adapter
+        }
+        ArrayAdapter(
+            requireContext(),
+            R.layout.spinner_item_filter,
+            homeViewModel.pricesList
+        ).also { adapter ->
+            adapter.setDropDownViewResource(R.layout.spinner_dropdown_filter)
+            cardFilter.spinnerPrice.adapter = adapter
+        }
+        ArrayAdapter(
+            requireContext(),
+            R.layout.spinner_item_filter,
+            homeViewModel.sizesList
+        ).also { adapter ->
+            adapter.setDropDownViewResource(R.layout.spinner_dropdown_filter)
+            cardFilter.spinnerSize.adapter = adapter
+        }
+
     }
 
     private fun FragmentHomeBinding.bindRecyclerView() {

@@ -6,8 +6,15 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:minHeight">48dp</item>
         <item name="android:minWidth">48dp</item>
-        <item name="android:background">@drawable/spinner_background</item>
         <item name="android:spinnerMode">dropdown</item>
+    </style>
+
+    <style name="SpinnerTheme.Location">
+        <item name="android:background">@drawable/spinner_background_location</item>
+    </style>
+
+    <style name="SpinnerTheme.Filter">
+        <item name="android:background">@drawable/spinner_background_filter</item>
     </style>
 
     <style name="TouchRipple">
@@ -34,6 +41,18 @@
         <item name="android:textSize">15sp</item>
         <item name="android:fontFamily">@font/mark_pro_medium</item>
         <item name="android:textColor">?android:attr/textColorSecondary</item>
+    </style>
+
+    <style name="Text.Filter">
+        <item name="android:textFontWeight">500</item>
+        <item name="lineHeight">22.82sp</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:letterSpacing">-0.02</item>
+    </style>
+
+    <style name="Text.Filter.Button">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">?android:attr/textColor</item>
     </style>
 
     <style name="Text.BottomBar">
@@ -74,9 +93,16 @@
     </style>
 
     <style name="Text.Spinner">
-        <item name="android:textFontWeight">500</item>
         <item name="android:letterSpacing">-0.02</item>
+    </style>
+    <style name="Text.Spinner.Location">
+        <item name="android:textFontWeight">500</item>
         <item name="lineHeight">19.01sp</item>
+    </style>
+    <style name="Text.Spinner.Filter">
+        <item name="android:textFontWeight">400</item>
+        <item name="android:textSize">18sp</item>
+        <item name="lineHeight">22.82sp</item>
     </style>
 
     <style name="Text.Clickable">

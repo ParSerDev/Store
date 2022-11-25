@@ -3,6 +3,7 @@ package com.parserdev.store.home.presentation.home
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.parserdev.store.data.dto.home.FavouriteItemDto
 import com.parserdev.store.data.repository.home.HomeRepository
 import com.parserdev.store.domain.models.home.HomeCategory
 import com.parserdev.store.domain.models.home.HomePage
@@ -11,6 +12,7 @@ import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import java.text.NumberFormat
 
 class HomeViewModel @AssistedInject constructor(
     private val repository: HomeRepository,
@@ -21,6 +23,22 @@ class HomeViewModel @AssistedInject constructor(
     var homePage: Flow<NetworkResult<HomePage?>>
     val accept: (HomeAction) -> Unit
 
+    val locationsList = listOf(
+            Location.Gro.name, Location.Moscow.name
+        )
+    val brandsList = listOf(
+        HomeFilter.Brand.Samsung.name,
+        HomeFilter.Brand.Sony.name,
+        HomeFilter.Brand.IPhone.name
+    )
+    val pricesList = listOf(
+        HomeFilter.Price.Low.amount,
+        HomeFilter.Price.Average.amount
+    )
+    val sizesList = listOf(
+        HomeFilter.Size.Small.inches,
+        HomeFilter.Size.Medium.inches
+    )
 
     init {
         val initialCategory: HomeCategory =
@@ -38,7 +56,7 @@ class HomeViewModel @AssistedInject constructor(
         state = combine(
             searches,
             changedCategory
-        ) { search, category ->
+        ) { search, category->
             HomeState(
                 query = search.query,
                 category = category.category
@@ -53,9 +71,9 @@ class HomeViewModel @AssistedInject constructor(
             viewModelScope.launch { actionStateFlow.emit(action) }
         }
 
-            homePage = state.flatMapLatest { homeState ->
-                repository.getHomePage(homeCategory = homeState.category)
-            }
+        homePage = state.flatMapLatest { homeState ->
+            repository.getHomePage(homeCategory = homeState.category)
+        }
     }
 
     override fun onCleared() {
@@ -74,8 +92,37 @@ sealed class HomeAction {
 
 data class HomeState(
     val query: String = "",
-    val category: HomeCategory = HomeCategory.PHONES
+    val category: HomeCategory = HomeCategory.PHONES,
+    val filter: HomeFilter = HomeFilter(),
+    val location: Location = Location.Gro
 )
+
+data class HomeFilter(
+    val brand: Brand = Brand.Samsung,
+    val price: Price = Price.Low,
+    val size: Size = Size.Small
+) {
+    sealed class Brand(val name: String) {
+        object Samsung : Brand(name = "Samsung")
+        object Sony : Brand(name = "Sony")
+        object IPhone : Brand(name = "IPhone")
+    }
+
+    sealed class Price(val amount: String) {
+        object Low : Price(amount = "$300 - $500")
+        object Average : Price(amount = "$500 - $1,000")
+    }
+
+    sealed class Size(val inches: String) {
+        object Small : Size(inches = "4.5 to 5.5 inches")
+        object Medium : Size(inches = "5.5 to 6.5 inches")
+    }
+}
+
+sealed class Location(val name: String) {
+    object Gro : Location(name = "Zihuatanejo, Gro")
+    object Moscow : Location(name = "Russia, Moscow")
+}
 
 private const val LAST_SEARCH_QUERY: String = "last_search_query"
 private const val LAST_CATEGORY: String = "last_category"

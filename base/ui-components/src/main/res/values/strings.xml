@@ -18,6 +18,11 @@
     <string name="description_like">Like</string>
     <string name="phones">Phones</string>
     <string name="explorer">Explorer</string>
+    <string name="filter_options">Filter options</string>
+    <string name="price">Price</string>
+    <string name="size">Size</string>
+    <string name="brand">Brand</string>
+    <string name="done">Done</string>
     <string name="computer">Computer</string>
     <string name="health">Health</string>
     <string name="books">Books</string>

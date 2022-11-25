@@ -21,6 +21,7 @@
         <item name="selectCategoryIconActiveColor">@android:color/white</item>
         <item name="detailsIconColor">@color/white_400</item>
         <item name="cartButtonColor">@color/blue_800</item>
+        <item name="dropDownIconColor">@color/blue_100</item>
         <item name="editTextHintColor">@color/orange_400</item>
         <!-- Customize your theme here. -->
     </style>
