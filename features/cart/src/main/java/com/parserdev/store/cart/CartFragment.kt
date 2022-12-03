@@ -65,6 +65,8 @@ class CartFragment : Fragment() {
                 cartViewModel.cartContent.collect {
                     when (it) {
                         is NetworkResult.Success -> {
+                            progressBar.visibility = View.GONE
+                            layout.visibility = View.VISIBLE
                             recyclerView.adapter =
                                 CartContentAdapter(
                                     cartItems = it.data?.cartItems,
@@ -91,7 +93,11 @@ class CartFragment : Fragment() {
                                 findNavController().popBackStack()
                             }
                         }
-                        else -> {}
+                        is NetworkResult.Loading -> {
+                            progressBar.visibility = View.VISIBLE
+                            layout.visibility = View.GONE
+                        }
+                        is NetworkResult.Error -> {}
                     }
                 }
             }
