@@ -194,10 +194,12 @@
     <style name="Text.Spinner">
         <item name="android:letterSpacing">-0.02</item>
     </style>
+
     <style name="Text.Spinner.Location">
         <item name="android:textFontWeight">500</item>
         <item name="lineHeight">19.01sp</item>
     </style>
+
     <style name="Text.Spinner.Filter">
         <item name="android:textFontWeight">400</item>
         <item name="android:textSize">18sp</item>
