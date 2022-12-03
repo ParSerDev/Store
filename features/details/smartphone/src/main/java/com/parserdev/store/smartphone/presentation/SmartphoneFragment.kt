@@ -65,6 +65,8 @@ class SmartphoneFragment : Fragment() {
                 smartphoneViewModel.smartphoneDetails.collect { networkResult ->
                     when (networkResult) {
                         is NetworkResult.Success -> {
+                            progressBar.visibility = View.GONE
+                            layout.visibility = View.VISIBLE
                             val data = networkResult.data
                             bindRating(
                                 rating = data?.rating
@@ -93,7 +95,11 @@ class SmartphoneFragment : Fragment() {
                                 )
                             )
                         }
-                        else -> {}
+                        is NetworkResult.Loading -> {
+                            progressBar.visibility = View.VISIBLE
+                            layout.visibility = View.GONE
+                        }
+                        is NetworkResult.Error -> {}
                     }
                 }
             }
@@ -373,7 +379,7 @@ class SmartphoneFragment : Fragment() {
     private fun provideViewModel() {
         smartphoneViewModel =
             ViewModelProvider(
-                requireActivity(),
+                this,
                 smartphoneViewModelFactory
             )[SmartphoneViewModel::class.java]
     }
