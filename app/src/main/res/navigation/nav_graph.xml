@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/fragment_home">
+
+    <fragment
+        android:id="@+id/fragment_home"
+        android:name="com.parserdev.store.home.presentation.HomeFragment"
+        android:label="HomeFragment">
+        <deepLink
+            android:id="@+id/deepLink"
+            app:uri="myapp://home" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_smartphone"
+        android:name="com.parserdev.store.smartphone.presentation.SmartphoneFragment"
+        android:label="SmartphoneFragment">
+        <deepLink
+            android:id="@+id/deepLink"
+            app:uri="myapp://details/smartphone" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_cart"
+        android:name="com.parserdev.store.cart.CartFragment"
+        android:label="CartFragment">
+        <deepLink
+            android:id="@+id/deepLink"
+            app:uri="myapp://cart" />
+    </fragment>
+
+
+
+</navigation>

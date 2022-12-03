@@ -11,7 +11,7 @@ data class HomePageDto(
     val homeStore: List<HotItemDto>? = null
 ) {
     fun mapToDomainModel() = HomePage(
-        bestSellers = bestSeller?.map { it.mapToDomain() },
+        bestSellers = bestSeller?.map { it.mapToDomainModel() },
         hotItems = homeStore?.map { it.mapToDomainModel() }
     )
 }

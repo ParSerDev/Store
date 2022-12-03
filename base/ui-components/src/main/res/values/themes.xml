@@ -13,18 +13,19 @@
         <item name="android:statusBarColor">@color/white_050</item>
         <item name="android:colorBackground">@color/white_050</item>
         <item name="android:windowLightStatusBar">true</item>
-        <item name="android:textColorPrimary">@color/orange_400</item>
-        <item name="android:textColorSecondary">@color/blue_900</item>
+        <item name="android:colorPrimary">@color/orange_400</item>
+        <item name="android:colorSecondary">@color/blue_900</item>
         <item name="android:textColor">@android:color/white</item>
         <item name="android:textColorHint">@color/white_350</item>
         <item name="selectCategoryIconInactiveColor">@color/blue_100</item>
         <item name="selectCategoryIconActiveColor">@android:color/white</item>
         <item name="detailsIconColor">@color/white_400</item>
-        <item name="cartButtonColor">@color/blue_800</item>
+        <item name="cartItemButtonColor">@color/blue_800</item>
         <item name="dropDownIconColor">@color/blue_100</item>
         <item name="editTextHintColor">@color/orange_400</item>
         <!-- Customize your theme here. -->
     </style>
+
     <style name="SplashTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="android:windowBackground">@drawable/ic_splash</item>
         <item name="colorPrimary">@color/orange_400</item>

@@ -2,14 +2,13 @@
 
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/layout"
+    android:id="@+id/layout_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="81dp"
-    android:orientation="vertical">
+    android:layout_marginBottom="81dp">
 
     <TextView
-        android:id="@+id/text_title_best_seller"
+        android:id="@+id/text_title"
         style="@style/Text.Title"
         android:layout_marginStart="17dp"
         android:layout_marginTop="11dp"
@@ -22,12 +21,12 @@
         style="@style/Text.Clickable"
         android:layout_marginEnd="33dp"
         android:text="@string/see_more"
-        app:layout_constraintBottom_toBottomOf="@id/text_title_best_seller"
+        app:layout_constraintBottom_toBottomOf="@id/text_title"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/text_title_best_seller" />
+        app:layout_constraintTop_toTopOf="@id/text_title" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_best_sellers"
+        android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
@@ -35,6 +34,6 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_title_best_seller" />
+        app:layout_constraintTop_toBottomOf="@id/text_title" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

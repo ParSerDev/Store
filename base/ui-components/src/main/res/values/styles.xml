@@ -35,12 +35,94 @@
         <item name="android:background">@drawable/ic_location_pointer</item>
     </style>
 
-    <style name="Text" parent="Theme.Store">
+    <style name="Text">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:textSize">15sp</item>
         <item name="android:fontFamily">@font/mark_pro_medium</item>
-        <item name="android:textColor">?android:attr/textColorSecondary</item>
+        <item name="android:textColor">?android:attr/colorSecondary</item>
+    </style>
+
+    <style name="Text.Cart">
+        <item name="android:textFontWeight">500</item>
+        <item name="lineHeight">19.01sp</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:letterSpacing">-0.02</item>
+    </style>
+
+    <style name="Text.Cart.Subtitle">
+        <item name="android:textFontWeight">400</item>
+        <item name="android:textColor">?android:attr/textColor</item>
+    </style>
+
+    <style name="Text.Cart.Price">
+        <item name="android:textFontWeight">700</item>
+        <item name="android:textColor">?android:attr/textColor</item>
+    </style>
+
+    <style name="Text.Cart.Item">
+        <item name="android:textFontWeight">500</item>
+        <item name="lineHeight">25.35sp</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">?android:attr/textColor</item>
+    </style>
+
+    <style name="Text.Cart.Item.Price">
+        <item name="android:textColor">?android:attr/colorPrimary</item>
+    </style>
+
+
+    <style name="Text.Cart.Title">
+        <item name="android:textFontWeight">700</item>
+        <item name="lineHeight">44.36sp</item>
+        <item name="android:textSize">35sp</item>
+    </style>
+
+    <style name="Text.Cart.Button">
+        <item name="android:textFontWeight">700</item>
+        <item name="lineHeight">25.35sp</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">?android:attr/textColor</item>
+    </style>
+
+    <style name="Text.Details">
+        <item name="android:textFontWeight">500</item>
+        <item name="lineHeight">20.28sp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:letterSpacing">-0.02</item>
+    </style>
+
+    <style name="Text.Details.Button">
+        <item name="android:textFontWeight">700</item>
+        <item name="lineHeight">16.48sp</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+
+    <style name="Text.Details.Button.Selected">
+        <item name="android:textColor">?android:attr/textColor</item>
+    </style>
+
+    <style name="Text.Details.Button.Deselected">
+        <item name="android:textColor">@color/white_500</item>
+    </style>
+
+    <style name="Text.Details.Button.Big">
+        <item name="lineHeight">25.35sp</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">?android:attr/textColor</item>
+    </style>
+
+    <style name="Text.Details.Icon">
+        <item name="android:textFontWeight">400</item>
+        <item name="lineHeight">13.94sp</item>
+        <item name="android:textSize">11sp</item>
+        <item name="android:textColor">?detailsIconColor</item>
+    </style>
+
+    <style name="Text.Details.Title">
+        <item name="lineHeight">30.42sp</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:letterSpacing">-0.01</item>
     </style>
 
     <style name="Text.Filter">
@@ -68,6 +150,23 @@
         <item name="android:textFontWeight">700</item>
         <item name="android:letterSpacing">-0.01</item>
         <item name="lineHeight">31.69sp</item>
+    </style>
+
+    <style name="Text.Tab">
+        <item name="android:textSize">20sp</item>
+        <item name="android:letterSpacing">-0.02</item>
+        <item name="lineHeight">25.35sp</item>
+    </style>
+
+    <style name="Text.Tab.Active">
+        <item name="android:textFontWeight">700</item>
+    </style>
+
+    <style name="Text.Tab.Inactive">
+        <item name="android:fontFamily">@font/mark_pro</item>
+        <item name="alpha">0.5</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textFontWeight">400</item>
     </style>
 
     <style name="Text.BestSeller">
@@ -110,7 +209,7 @@
         <item name="android:letterSpacing">-0.02</item>
         <item name="lineHeight">19.01sp</item>
         <item name="android:fontFamily">@font/mark_pro</item>
-        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:textColor">?android:attr/colorPrimary</item>
     </style>
 
     <style name="Text.Category">
@@ -122,7 +221,7 @@
     </style>
 
     <style name="Text.Hint">
-        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:textColor">?android:attr/colorPrimary</item>
         <item name="android:fontFamily">@font/mark_pro</item>
         <item name="android:textFontWeight">400</item>
         <item name="android:letterSpacing">-0.03</item>
@@ -156,7 +255,7 @@
     </style>
 
     <style name="Text.HotItem.Buy">
-        <item name="android:textColor">?android:attr/textColorSecondary</item>
+        <item name="android:textColor">?android:attr/colorSecondary</item>
         <item name="android:textFontWeight">700</item>
         <item name="lineHeight">13.13sp</item>
         <item name="android:textSize">11sp</item>

@@ -49,6 +49,7 @@ dependencies {
     implementation project(':data')
     implementation project(':features:home')
     implementation project(':features:cart')
+    implementation project(':features:details:smartphone')
     implementation project(':base:ui-components')
     //libraries
     implementation libs.core.ktx

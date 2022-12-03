@@ -22,4 +22,9 @@ class RetrofitInstance @Inject constructor() : NetworkInstance {
         retrofit.create(DetailsService::class.java)
     }
 
+    override val cartService: CartService by lazy {
+        retrofit.create(CartService::class.java)
+    }
+
+
 }

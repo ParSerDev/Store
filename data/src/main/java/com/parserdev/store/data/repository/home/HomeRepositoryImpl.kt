@@ -4,6 +4,7 @@ import com.parserdev.store.data.database.StoreDatabase
 import com.parserdev.store.data.dto.home.FavouriteItemDto
 import com.parserdev.store.data.network.NetworkInstance
 import com.parserdev.store.data.utils.safeApiCall
+import com.parserdev.store.domain.models.home.CartItemsAmount
 import com.parserdev.store.domain.models.home.HomeCategory
 import com.parserdev.store.domain.models.home.HomePage
 import com.parserdev.store.domain.network.NetworkResult
@@ -39,6 +40,24 @@ class HomeRepositoryImpl @Inject constructor(
                 HomeCategory.TOOLS -> emit(NetworkResult.Error(message = NO_DATA))
             }
         }
+    }
+
+    override suspend fun getCartItemsAmount(): NetworkResult<CartItemsAmount?> {
+        val networkResult =
+            safeApiCall { networkInstance.cartService.getCartContentDto(url = PHONE_HOME_PAGE_URL) }
+        return when (networkResult) {
+            is NetworkResult.Success ->
+                NetworkResult.Success(
+                    data = networkResult.data?.mapToCartItemsAmount()
+                )
+            is NetworkResult.Error ->
+                NetworkResult.Error(
+                    message = networkResult.message
+                )
+
+            is NetworkResult.Loading -> NetworkResult.Loading(data = networkResult.data?.mapToCartItemsAmount())
+        }
+
     }
 
     override suspend fun insertFavouriteItemDto(favouriteItemDto: FavouriteItemDto) {

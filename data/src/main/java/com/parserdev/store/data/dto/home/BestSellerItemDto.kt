@@ -23,7 +23,7 @@ data class BestSellerItemDto(
     @field:SerializedName("picture")
     val picture: String? = null
 ) {
-    fun mapToDomain() = BestSellerItem(
+    fun mapToDomainModel() = BestSellerItem(
         isFavorites, discountPrice, id, title, priceWithoutDiscount, picture
     )
 }

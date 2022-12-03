@@ -3,19 +3,19 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/bottom_bar"
+    android:id="@+id/layout_bottom_bar"
     android:layout_width="match_parent"
     android:layout_height="72dp"
     android:background="@drawable/shape_bottom_bar"
     app:layout_constraintBottom_toBottomOf="parent">
 
-    <View
-        android:id="@+id/dot"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_dot"
         android:layout_width="8dp"
         android:layout_height="8dp"
         android:layout_marginStart="68dp"
-        android:background="@drawable/ripple_primary_shape_onprimary_rounded50dp"
-        android:clickable="false"
+        app:cardCornerRadius="50dp"
+        app:cardBackgroundColor="@color/white_000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -26,37 +26,46 @@
         android:layout_marginStart="7dp"
         android:layout_marginBottom="3dp"
         android:text="@string/explorer"
-        app:layout_constraintBottom_toBottomOf="@id/dot"
-        app:layout_constraintStart_toEndOf="@id/dot"
-        app:layout_constraintTop_toTopOf="@id/dot" />
+        app:layout_constraintBottom_toBottomOf="@id/card_dot"
+        app:layout_constraintStart_toEndOf="@id/card_dot"
+        app:layout_constraintTop_toTopOf="@id/card_dot" />
 
     <ImageView
-        android:id="@+id/image_cart_icon"
+        android:id="@+id/image_cart"
         android:layout_width="18dp"
         android:layout_height="18dp"
         android:layout_marginStart="113dp"
         android:background="@drawable/ic_cart"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/dot"
+        app:layout_constraintStart_toEndOf="@id/card_dot"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/button_cart"
+        style="@style/TouchRipple"
+        android:contentDescription="@string/description_cart"
+        app:layout_constraintBottom_toBottomOf="@id/image_cart"
+        app:layout_constraintEnd_toEndOf="@id/image_cart"
+        app:layout_constraintStart_toStartOf="@id/image_cart"
+        app:layout_constraintTop_toTopOf="@id/image_cart" />
+
     <ImageView
-        android:id="@+id/image_like_icon"
+        android:id="@+id/image_like"
         android:layout_width="19dp"
         android:layout_height="17dp"
         android:layout_marginStart="183dp"
         android:background="@drawable/ic_heart_onsecondary_inactive"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/dot"
+        app:layout_constraintStart_toEndOf="@id/card_dot"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/image_profile_icon"
+        android:id="@+id/image_profile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="254dp"
         android:background="@drawable/ic_profile"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/dot"
+        app:layout_constraintStart_toEndOf="@id/card_dot"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

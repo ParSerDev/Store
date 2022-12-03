@@ -10,7 +10,7 @@
         android:layout_height="match_parent">
 
         <androidx.appcompat.widget.AppCompatSpinner
-            android:id="@+id/spinner"
+            android:id="@+id/spinner_location"
             style="@style/SpinnerTheme.Location"
             android:layout_marginTop="17.5dp"
             android:contentDescription="@string/description_spinner"
@@ -23,9 +23,9 @@
             style="@style/LocationPointer"
             android:layout_marginEnd="4dp"
             android:contentDescription="@string/description_location_pointer"
-            app:layout_constraintBottom_toBottomOf="@id/spinner"
-            app:layout_constraintEnd_toStartOf="@id/spinner"
-            app:layout_constraintTop_toTopOf="@id/spinner" />
+            app:layout_constraintBottom_toBottomOf="@id/spinner_location"
+            app:layout_constraintEnd_toStartOf="@id/spinner_location"
+            app:layout_constraintTop_toTopOf="@id/spinner_location" />
 
         <Button
             android:id="@+id/button_filter"
@@ -43,9 +43,9 @@
             android:layout_marginTop="3dp"
             android:layout_marginEnd="@dimen/margin_end"
             android:contentDescription="@string/description_filter"
-            app:layout_constraintBottom_toBottomOf="@id/spinner"
+            app:layout_constraintBottom_toBottomOf="@id/spinner_location"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/spinner" />
+            app:layout_constraintTop_toTopOf="@id/spinner_location" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"
@@ -53,17 +53,17 @@
             android:layout_height="0dp"
             android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toBottomOf="@id/layout_bottom_bar"
+            app:layout_constraintBottom_toBottomOf="@id/bottom_bar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/spinner" />
+            app:layout_constraintTop_toBottomOf="@id/spinner_location" />
 
         <include
-            android:id="@+id/layout_bottom_bar"
+            android:id="@+id/bottom_bar"
             layout="@layout/layout_bottom_bar" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <include
-        android:id="@+id/card_filter"
+        android:id="@+id/filter"
         layout="@layout/card_filter" />
 </RelativeLayout>

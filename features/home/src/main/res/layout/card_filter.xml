@@ -1,59 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/filter"
-    app:cardElevation="20dp"
+    android:id="@+id/card"
     android:layout_width="match_parent"
     android:layout_height="405dp"
     android:layout_alignParentBottom="true"
     android:layout_marginBottom="-405dp"
-    app:cardCornerRadius="30dp">
+    app:cardBackgroundColor="?colorOnPrimary"
+    app:cardCornerRadius="30dp"
+    app:cardElevation="20dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="?attr/colorOnPrimary"
-        android:elevation="3dp">
+        android:layout_height="match_parent">
 
-        <androidx.cardview.widget.CardView
+        <include
             android:id="@+id/button_close"
-            android:layout_width="37dp"
-            android:layout_height="37dp"
-            android:layout_marginStart="44dp"
-            android:layout_marginTop="24dp"
-            android:elevation="0dp"
-            app:cardBackgroundColor="?attr/colorSecondary"
-            app:cardCornerRadius="10dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            layout="@layout/button_close" />
 
-            <ImageView
-                android:id="@+id/ic_close"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:background="@drawable/ic_cross" />
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
+        <include
             android:id="@+id/button_done"
-            android:layout_width="86dp"
-            android:layout_height="37dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="20dp"
-            android:elevation="0dp"
-            app:cardBackgroundColor="?attr/colorPrimary"
-            app:cardCornerRadius="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <TextView
-                style="@style/Text.Filter.Button"
-                android:layout_gravity="center"
-                android:layout_marginBottom="1dp"
-                android:text="@string/done" />
-        </androidx.cardview.widget.CardView>
+            layout="@layout/button_done" />
 
         <TextView
             android:id="@+id/text_filter_options"
@@ -68,19 +35,19 @@
         <TextView
             android:id="@+id/text_brand"
             style="@style/Text.Filter"
-            android:text="@string/brand"
             android:layout_marginBottom="10dp"
+            android:text="@string/brand"
             app:layout_constraintBottom_toTopOf="@id/spinner_brand"
             app:layout_constraintStart_toStartOf="@id/spinner_brand" />
 
         <androidx.appcompat.widget.AppCompatSpinner
             android:id="@+id/spinner_brand"
+            style="@style/SpinnerTheme.Filter"
             android:layout_width="337dp"
             android:layout_height="37dp"
             android:layout_marginBottom="42dp"
-            style="@style/SpinnerTheme.Filter"
-            app:layout_constraintStart_toStartOf="@id/spinner_price"
-            app:layout_constraintBottom_toTopOf="@id/spinner_price"/>
+            app:layout_constraintBottom_toTopOf="@id/spinner_price"
+            app:layout_constraintStart_toStartOf="@id/spinner_price" />
 
         <TextView
             android:id="@+id/text_price"
@@ -92,12 +59,12 @@
 
         <androidx.appcompat.widget.AppCompatSpinner
             android:id="@+id/spinner_price"
+            style="@style/SpinnerTheme.Filter"
             android:layout_width="337dp"
             android:layout_height="37dp"
             android:layout_marginBottom="45dp"
-            style="@style/SpinnerTheme.Filter"
-            app:layout_constraintStart_toStartOf="@id/spinner_size"
-            app:layout_constraintBottom_toTopOf="@id/spinner_size"/>
+            app:layout_constraintBottom_toTopOf="@id/spinner_size"
+            app:layout_constraintStart_toStartOf="@id/spinner_size" />
 
         <TextView
             android:id="@+id/text_size"
@@ -109,13 +76,13 @@
 
         <androidx.appcompat.widget.AppCompatSpinner
             android:id="@+id/spinner_size"
+            style="@style/SpinnerTheme.Filter"
             android:layout_width="337dp"
             android:layout_height="37dp"
             android:layout_marginStart="46dp"
             android:layout_marginBottom="74dp"
-            style="@style/SpinnerTheme.Filter"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

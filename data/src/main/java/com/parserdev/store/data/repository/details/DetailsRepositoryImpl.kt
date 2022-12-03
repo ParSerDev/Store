@@ -10,7 +10,7 @@ class DetailsRepositoryImpl @Inject constructor(
     private val networkInstance: NetworkInstance
 ) : DetailsRepository {
 
-    override suspend fun getPhoneDetails(url: String): NetworkResult<PhoneDetails?> {
+    override suspend fun getPhoneDetails(id: Int): NetworkResult<PhoneDetails?> {
         return when (val networkResult =
             safeApiCall { networkInstance.detailsService.getPhoneDetailsDto(url = PHONE_DETAILS_URL) }) {
             is NetworkResult.Success -> NetworkResult.Success(data = networkResult.data?.mapToDomainModel())

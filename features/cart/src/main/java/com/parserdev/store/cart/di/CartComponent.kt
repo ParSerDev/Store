@@ -1,7 +1,7 @@
 package com.parserdev.store.cart.di
 
+import com.parserdev.store.cart.CartFragment
 import com.parserdev.store.cart.di.scopes.CartScope
-import com.parserdev.store.cart.presentation.CartFragment
 import dagger.Subcomponent
 
 @CartScope

@@ -14,10 +14,10 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Store"
 include ':app'
-include ':features'
 include ':features:home'
-include ':features:cart'
 include ':data'
-include ':base'
 include ':base:ui-components'
 include ':domain'
+include ':features:details:smartphone'
+include ':features:cart'
+include ':base:utility'

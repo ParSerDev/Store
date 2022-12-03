@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layout_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/text_title_hot_sales"
+        android:id="@+id/text_title"
         style="@style/Text.Title"
         android:layout_marginStart="17dp"
         android:layout_marginTop="24dp"
@@ -19,17 +20,17 @@
         android:layout_marginEnd="33dp"
         android:text="@string/see_more"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/text_title_hot_sales"
-        app:layout_constraintBottom_toBottomOf="@id/text_title_hot_sales"/>
+        app:layout_constraintTop_toTopOf="@id/text_title"
+        app:layout_constraintBottom_toBottomOf="@id/text_title"/>
 
     <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/view_pager_hot_sales"
+        android:id="@+id/view_pager"
         android:layout_width="match_parent"
         android:layout_height="182dp"
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_title_hot_sales"/>
+        app:layout_constraintTop_toBottomOf="@id/text_title"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
