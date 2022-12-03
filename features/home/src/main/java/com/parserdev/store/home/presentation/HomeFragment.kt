@@ -145,6 +145,8 @@ class HomeFragment : Fragment() {
                 homeViewModel.homePage.collect { page ->
                     when (page) {
                         is NetworkResult.Success -> {
+                            progressBar.visibility = View.GONE
+                            layout.visibility = View.VISIBLE
                             compositeAdapter.submitList(
                                 listOf(
                                     SelectCategoryListItem(
@@ -160,7 +162,11 @@ class HomeFragment : Fragment() {
                                 )
                             )
                         }
-                        else -> {}
+                        is NetworkResult.Loading -> {
+                            progressBar.visibility = View.VISIBLE
+                            layout.visibility = View.GONE
+                        }
+                        is NetworkResult.Error -> {}
                     }
                 }
         }
