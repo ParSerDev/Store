@@ -1,6 +1,7 @@
 package com.parserdev.store.utility
 
 import android.content.Context
+import android.content.res.Resources
 import android.util.TypedValue
 import androidx.annotation.AttrRes
 import androidx.annotation.ColorInt
@@ -26,4 +27,12 @@ fun formatCurrency(
     format.maximumFractionDigits = maximumFractionDigits
     format.currency = Currency.getInstance(currencyCode)
     return format.format(price)
+}
+
+fun Resources.getDp(pixels: Float): Int {
+    return TypedValue.applyDimension(
+        TypedValue.COMPLEX_UNIT_DIP,
+        pixels,
+        displayMetrics
+    ).toInt()
 }

@@ -1,7 +1,6 @@
 package com.parserdev.store.cart
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,12 +13,11 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView.Adapter.StateRestorationPolicy
 import com.parserdev.store.cart.databinding.FragmentCartBinding
 import com.parserdev.store.cart.di.CartComponentProvider
+import com.parserdev.store.domain.models.cart.CartItem
 import com.parserdev.store.domain.network.NetworkResult
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.subscribe
+import com.parserdev.store.utility.formatCurrency
+import com.parserdev.store.utility.getDp
 import kotlinx.coroutines.launch
-import java.text.NumberFormat
-import java.util.*
 import javax.inject.Inject
 
 class CartFragment : Fragment() {
@@ -52,46 +50,17 @@ class CartFragment : Fragment() {
     }
 
     private fun FragmentCartBinding.bindState() {
-        bindRecyclerView()
-        recyclerView.adapter?.stateRestorationPolicy =
-            StateRestorationPolicy.PREVENT_WHEN_EMPTY
-
-    }
-
-    private fun FragmentCartBinding.bindRecyclerView() {
-
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                cartViewModel.cartContent.collect {
-                    when (it) {
+                cartViewModel.cartContent.collect { networkResult ->
+                    when (networkResult) {
                         is NetworkResult.Success -> {
+                            val data = networkResult.data
+                            bindNavigation()
+                            bindRecyclerView(cartItems = data?.cartItems)
+                            bindPrice(totalPrice = data?.total, deliveryPrice = data?.delivery)
                             progressBar.visibility = View.GONE
                             layout.visibility = View.VISIBLE
-                            recyclerView.adapter =
-                                CartContentAdapter(
-                                    cartItems = it.data?.cartItems,
-                                    deleteClickListener = {},
-                                    addItemClickListener = {},
-                                    removeItemClickListener = {},
-                                    marginTop = android.util.TypedValue.applyDimension(
-                                        android.util.TypedValue.COMPLEX_UNIT_DIP,
-                                        34F,
-                                        resources.displayMetrics
-                                    ).toInt(),
-                                    marginBottom = android.util.TypedValue.applyDimension(
-                                        android.util.TypedValue.COMPLEX_UNIT_DIP,
-                                        34F,
-                                        resources.displayMetrics
-                                    ).toInt()
-                                )
-                            val format: NumberFormat = NumberFormat.getCurrencyInstance()
-                            format.maximumFractionDigits = 0
-                            format.currency = Currency.getInstance("USD")
-                            textTotalPrice.text = (format.format((it.data?.total ?: 0)).toString()) + " us"
-                            textDeliveryPrice.text = it.data?.delivery
-                            buttonBack.setOnClickListener {
-                                findNavController().popBackStack()
-                            }
                         }
                         is NetworkResult.Loading -> {
                             progressBar.visibility = View.VISIBLE
@@ -102,7 +71,42 @@ class CartFragment : Fragment() {
                 }
             }
         }
+        recyclerView.adapter?.stateRestorationPolicy =
+            StateRestorationPolicy.PREVENT_WHEN_EMPTY
+    }
 
+    private fun FragmentCartBinding.bindRecyclerView(
+        cartItems: List<CartItem?>?
+    ) {
+        recyclerView.adapter =
+            CartContentAdapter(
+                cartItems = cartItems,
+                deleteClickListener = {},
+                addItemClickListener = {},
+                removeItemClickListener = {},
+                marginTop = resources.getDp(pixels = 34F),
+                marginBottom = resources.getDp(pixels = 34F)
+            )
+    }
+
+    private fun FragmentCartBinding.bindNavigation() {
+        buttonBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
+    }
+
+    private fun FragmentCartBinding.bindPrice(
+        totalPrice: Int?,
+        deliveryPrice: String?
+    ) {
+        textTotalPrice.text = String.format(
+            resources.getString(R.string.format_currency), formatCurrency(
+                price = totalPrice,
+                maximumFractionDigits = 0,
+                currencyCode = "USD"
+            )
+        )
+        textDeliveryPrice.text = deliveryPrice
     }
 
     private fun injectCartComponent() {

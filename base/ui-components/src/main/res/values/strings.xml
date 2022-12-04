@@ -26,6 +26,7 @@
     <string name="product_details">Product Details</string>
     <string name="size">Size</string>
     <string name="format_capacity">%1$s gb</string>
+    <string name="format_currency">%1$s us</string>
     <string name="brand">Brand</string>
     <string name="done">Done</string>
     <string name="computer">Computer</string>
