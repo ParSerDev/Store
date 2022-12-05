@@ -94,6 +94,7 @@ class HomeFragment : Fragment() {
     private fun FragmentHomeBinding.bindFilter() {
         buttonFilter.setOnClickListener {
             ObjectAnimator.ofFloat(
+                filter.card, "translationY",
                 resources.getDp(pixels = -375F)
             ).apply {
                 duration = 1000
@@ -103,6 +104,7 @@ class HomeFragment : Fragment() {
         filter.card.setOnClickListener { }
         filter.buttonClose.setOnClickListener {
             ObjectAnimator.ofFloat(
+                filter.card, "translationY",
                 resources.getDp(pixels = 375F)
             ).apply {
                 duration = 1000
@@ -187,11 +189,12 @@ class HomeFragment : Fragment() {
                             recyclerView.findViewHolderForAdapterPosition(3) as BestSellerDelegateAdapter.BestSellerDelegateViewHolder
                         val bestSellerDelegateRecyclerView: RecyclerView =
                             bestSellerDelegateViewHolder.binding.recyclerView
-                        bestSellerDelegateRecyclerView.adapter?.notifyItemChanged(pos,item)
+                        bestSellerDelegateRecyclerView.adapter?.notifyItemChanged(pos, item)
                     },
                     navigationClickListener = { url ->
                         val deeplink =
-                            NavDeepLinkRequest.Builder.fromUri(CONST_DEEPLINK_SMARTPHONE.toUri()).build()
+                            NavDeepLinkRequest.Builder.fromUri(CONST_DEEPLINK_SMARTPHONE.toUri())
+                                .build()
                         findNavController().navigate(deeplink)
 
                     }
