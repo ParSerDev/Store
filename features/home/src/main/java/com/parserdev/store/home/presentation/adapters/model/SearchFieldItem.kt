@@ -2,7 +2,9 @@ package com.parserdev.store.home.presentation.adapters.model
 
 import com.parserdev.store.home.presentation.adapters.delegate.DelegateAdapterItem
 
-class SearchFieldItem : DelegateAdapterItem {
+class SearchFieldItem(
+    val editTextListener: (String) -> Unit
+) : DelegateAdapterItem {
     override fun id(): Any = SearchFieldItem::class.toString()
     override fun content(): Any = 0
     override fun equals(other: Any?): Boolean {

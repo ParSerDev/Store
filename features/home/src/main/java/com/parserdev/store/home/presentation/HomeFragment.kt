@@ -161,18 +161,22 @@ class HomeFragment : Fragment() {
         hotItems: List<HotItem>?,
         bestSellers: List<BestSellerItem>?
     ) {
-        initCompositeAdapter(bestSellers = bestSellers)
+        initCompositeAdapter()
 
         recyclerView.adapter = compositeAdapter
         recyclerView.adapter?.stateRestorationPolicy = StateRestorationPolicy.PREVENT_WHEN_EMPTY
         compositeAdapter.submitList(
             listOf(
                 SelectCategoryListItem(
-                    categories = categories
+                    categories = categories,
+                    clickListener = {}
                 ),
-                SearchFieldItem(),
+                SearchFieldItem(
+                    editTextListener = {}
+                ),
                 HotSalesListItem(
-                    items = hotItems
+                    items = hotItems,
+                    clickListener = {}
                 ),
                 BestSellersListItem(
                     bestSellers = bestSellers,
@@ -196,14 +200,13 @@ class HomeFragment : Fragment() {
         )
     }
 
-    private fun initCompositeAdapter(bestSellers: List<BestSellerItem>?) {
+    private fun initCompositeAdapter() {
         val selectCategoryDelegateAdapter = SelectCategoryDelegateAdapter(
-            clickListener = {},
             marginRight = resources.getDp(pixels = 27F).toInt(),
             marginLeft = resources.getDp(pixels = 27F).toInt()
         )
-        val searchFieldDelegateAdapter = SearchFieldDelegateAdapter(editTextListener = {})
-        val hotSalesDelegateAdapter = HotSalesDelegateAdapter(clickListener = {})
+        val searchFieldDelegateAdapter = SearchFieldDelegateAdapter()
+        val hotSalesDelegateAdapter = HotSalesDelegateAdapter()
         val bestSellerDelegateAdapter = BestSellerDelegateAdapter(
             gridLayoutManager = GridLayoutManager(requireContext(), 2),
             marginLeft = resources.getDp(pixels = 17F).toInt(),

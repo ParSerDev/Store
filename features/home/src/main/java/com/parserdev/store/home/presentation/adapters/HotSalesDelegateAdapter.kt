@@ -11,7 +11,7 @@ import com.parserdev.store.home.presentation.adapters.delegate.DelegateAdapterIt
 import com.parserdev.store.home.presentation.adapters.model.HotSalesListItem
 import kotlin.math.abs
 
-class HotSalesDelegateAdapter(private val clickListener: (HotItem) -> Unit) :
+class HotSalesDelegateAdapter :
     DelegateAdapter<HotSalesListItem, HotSalesDelegateAdapter.HotSalesViewHolder>(
         HotSalesListItem::class.java
     ) {
@@ -19,8 +19,7 @@ class HotSalesDelegateAdapter(private val clickListener: (HotItem) -> Unit) :
         val binding =
             ItemDelegateHotSalesBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return HotSalesViewHolder(
-            binding = binding,
-            clickListener = clickListener
+            binding = binding
         )
     }
 
@@ -33,8 +32,7 @@ class HotSalesDelegateAdapter(private val clickListener: (HotItem) -> Unit) :
     }
 
     class HotSalesViewHolder(
-        private val binding: ItemDelegateHotSalesBinding,
-        private val clickListener: (HotItem) -> Unit
+        private val binding: ItemDelegateHotSalesBinding
     ) :
         RecyclerView.ViewHolder(binding.root) {
 
@@ -42,7 +40,7 @@ class HotSalesDelegateAdapter(private val clickListener: (HotItem) -> Unit) :
             binding.apply {
                 val hotItemsAdapter = HotItemsAdapter(
                     hotItems = item.items,
-                    clickListener = clickListener
+                    clickListener = item.clickListener
                 )
                 binding.viewPager.apply {
                     clipChildren = false

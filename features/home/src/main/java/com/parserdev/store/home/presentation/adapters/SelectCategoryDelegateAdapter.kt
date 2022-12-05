@@ -10,7 +10,6 @@ import com.parserdev.store.home.presentation.adapters.delegate.DelegateAdapterIt
 import com.parserdev.store.home.presentation.adapters.model.SelectCategoryListItem
 
 class SelectCategoryDelegateAdapter(
-    val clickListener: (CategoryItem) -> Unit,
     val marginLeft: Int,
     val marginRight: Int
 ) :
@@ -22,7 +21,6 @@ class SelectCategoryDelegateAdapter(
             ItemDelegateSelectCategoryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return SelectCategoryViewHolder(
             binding = binding,
-            clickListener = clickListener,
             marginLeft = marginLeft,
             marginRight = marginRight
         )
@@ -38,7 +36,6 @@ class SelectCategoryDelegateAdapter(
 
     class SelectCategoryViewHolder(
         private val binding: ItemDelegateSelectCategoryBinding,
-        private val clickListener: (CategoryItem) -> Unit,
         private val marginLeft: Int,
         private val marginRight: Int
     ) :
@@ -46,7 +43,7 @@ class SelectCategoryDelegateAdapter(
         fun bind(item: SelectCategoryListItem) {
             val categoriesAdapter = CategoriesAdapter(
                 categories = item.categories,
-                clickListener = clickListener,
+                clickListener = item.clickListener,
                 marginLeft = marginLeft,
                 marginRight = marginRight
             )

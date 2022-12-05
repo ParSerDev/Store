@@ -4,7 +4,8 @@ import com.parserdev.store.domain.models.home.CategoryItem
 import com.parserdev.store.home.presentation.adapters.delegate.DelegateAdapterItem
 
 data class SelectCategoryListItem(
-    val categories: List<CategoryItem>
+    val categories: List<CategoryItem>,
+    val clickListener: (CategoryItem) -> Unit,
 ) : DelegateAdapterItem {
     override fun id(): Any = SelectCategoryListItem::class.toString()
     override fun content(): Any = categories

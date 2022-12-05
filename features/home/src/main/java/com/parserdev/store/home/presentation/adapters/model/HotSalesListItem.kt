@@ -4,7 +4,8 @@ import com.parserdev.store.domain.models.home.HotItem
 import com.parserdev.store.home.presentation.adapters.delegate.DelegateAdapterItem
 
 data class HotSalesListItem(
-    val items: List<HotItem>?
+    val items: List<HotItem>?,
+    val clickListener: (HotItem) -> Unit
 ) : DelegateAdapterItem {
     override fun id(): Any = HotSalesListItem::class.toString()
     override fun content(): Any = items?:-1

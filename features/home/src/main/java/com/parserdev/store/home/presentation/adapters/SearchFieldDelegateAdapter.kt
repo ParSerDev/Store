@@ -10,14 +10,14 @@ import com.parserdev.store.home.presentation.adapters.delegate.DelegateAdapter
 import com.parserdev.store.home.presentation.adapters.delegate.DelegateAdapterItem
 import com.parserdev.store.home.presentation.adapters.model.SearchFieldItem
 
-class SearchFieldDelegateAdapter(private val editTextListener: (String) -> Unit) :
+class SearchFieldDelegateAdapter :
     DelegateAdapter<SearchFieldItem, SearchFieldDelegateAdapter.SearchFieldViewHolder>(
         SearchFieldItem::class.java
     ) {
     override fun createViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
         val binding =
             ItemDelegateSearchFieldBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return SearchFieldViewHolder(binding, editTextListener)
+        return SearchFieldViewHolder(binding)
     }
 
     override fun bindViewHolder(
@@ -25,19 +25,18 @@ class SearchFieldDelegateAdapter(private val editTextListener: (String) -> Unit)
         viewHolder: SearchFieldViewHolder,
         payloads: List<DelegateAdapterItem.Payloadable>
     ) {
-        viewHolder.bind()
+        viewHolder.bind(item = model)
     }
 
     class SearchFieldViewHolder(
-        private val binding: ItemDelegateSearchFieldBinding,
-        private val editTextListener: (String) -> Unit
+        private val binding: ItemDelegateSearchFieldBinding
     ) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind() {
+        fun bind(item: SearchFieldItem) {
             binding.editTextSearch.setOnEditorActionListener { _, actionId, _ ->
                 if (actionId == EditorInfo.IME_ACTION_GO) {
-                    editTextListener.invoke(binding.editTextSearch.text.trim().toString())
+                    item.editTextListener.invoke(binding.editTextSearch.text.trim().toString())
                     true
                 } else {
                     false
@@ -45,7 +44,7 @@ class SearchFieldDelegateAdapter(private val editTextListener: (String) -> Unit)
             }
             binding.editTextSearch.setOnKeyListener { _, keyCode, event ->
                 if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
-                    editTextListener.invoke(binding.editTextSearch.text.trim().toString())
+                    item.editTextListener.invoke(binding.editTextSearch.text.trim().toString())
                     true
                 } else {
                     false
