@@ -2,7 +2,6 @@ package com.parserdev.store.home.presentation
 
 import android.animation.ObjectAnimator
 import android.os.Bundle
-import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,23 +13,26 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavDeepLinkRequest
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter.StateRestorationPolicy
+import com.parserdev.store.domain.models.home.BestSellerItem
 import com.parserdev.store.domain.models.home.CategoryItem
 import com.parserdev.store.domain.models.home.HomeCategory
+import com.parserdev.store.domain.models.home.HotItem
 import com.parserdev.store.domain.network.NetworkResult
-import com.parserdev.ui_components.R
 import com.parserdev.store.home.databinding.FragmentHomeBinding
 import com.parserdev.store.home.di.HomeComponentProvider
-import com.parserdev.store.home.presentation.adapters.BestSellerDelegateAdapter
-import com.parserdev.store.home.presentation.adapters.HotSalesDelegateAdapter
-import com.parserdev.store.home.presentation.adapters.SearchFieldDelegateAdapter
-import com.parserdev.store.home.presentation.adapters.SelectCategoryDelegateAdapter
+import com.parserdev.store.home.presentation.adapters.*
 import com.parserdev.store.home.presentation.adapters.delegate.CompositeAdapter
 import com.parserdev.store.home.presentation.adapters.model.BestSellersListItem
 import com.parserdev.store.home.presentation.adapters.model.HotSalesListItem
 import com.parserdev.store.home.presentation.adapters.model.SearchFieldItem
 import com.parserdev.store.home.presentation.adapters.model.SelectCategoryListItem
+import com.parserdev.store.utility.CONST_DEEPLINK_CART
+import com.parserdev.store.utility.CONST_DEEPLINK_SMARTPHONE
 import com.parserdev.store.utility.getColorFromAttr
+import com.parserdev.store.utility.getDp
+import com.parserdev.ui_components.R
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -59,26 +61,40 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         injectHomeComponent()
         provideViewModel()
+        initCategories()
         binding.bindState()
     }
 
     private fun FragmentHomeBinding.bindState() {
         bindSpinners()
-        bindRecyclerView()
-        bottomBar.buttonCart.setOnClickListener{
-            val deeplink =
-                NavDeepLinkRequest.Builder.fromUri("myapp://cart".toUri()).build()
-            findNavController().navigate(deeplink)
+        bindBottomBar()
+        bindFilter()
+        viewLifecycleOwner.lifecycleScope.launch {
+            homeViewModel.homePage.collect { networkResult ->
+                when (networkResult) {
+                    is NetworkResult.Success -> {
+                        val data = networkResult.data
+                        bindRecyclerView(
+                            hotItems = data?.hotItems,
+                            bestSellers = data?.bestSellers
+                        )
+                        progressBar.visibility = View.GONE
+                        layout.visibility = View.VISIBLE
+                    }
+                    is NetworkResult.Loading -> {
+                        progressBar.visibility = View.VISIBLE
+                        layout.visibility = View.GONE
+                    }
+                    is NetworkResult.Error -> {}
+                }
+            }
         }
-        recyclerView.adapter?.stateRestorationPolicy = StateRestorationPolicy.PREVENT_WHEN_EMPTY
-        bottomBar.layoutBottomBar.setOnClickListener { }
+    }
+
+    private fun FragmentHomeBinding.bindFilter() {
         buttonFilter.setOnClickListener {
             ObjectAnimator.ofFloat(
-                filter.card, "translationY", TypedValue.applyDimension(
-                    TypedValue.COMPLEX_UNIT_DIP,
-                    -375F,
-                    resources.displayMetrics
-                )
+                resources.getDp(pixels = -375F)
             ).apply {
                 duration = 1000
                 start()
@@ -87,18 +103,23 @@ class HomeFragment : Fragment() {
         filter.card.setOnClickListener { }
         filter.buttonClose.setOnClickListener {
             ObjectAnimator.ofFloat(
-                filter.card, "translationY", TypedValue.applyDimension(
-                    TypedValue.COMPLEX_UNIT_DIP,
-                    375F,
-                    resources.displayMetrics
-                )
+                resources.getDp(pixels = 375F)
             ).apply {
                 duration = 1000
                 start()
             }
         }
-
     }
+
+    private fun FragmentHomeBinding.bindBottomBar() {
+        bottomBar.layoutBottomBar.setOnClickListener { }
+        bottomBar.buttonCart.setOnClickListener {
+            val deeplink =
+                NavDeepLinkRequest.Builder.fromUri(CONST_DEEPLINK_CART.toUri()).build()
+            findNavController().navigate(deeplink)
+        }
+    }
+
 
     private fun FragmentHomeBinding.bindSpinners() {
         ArrayAdapter(
@@ -136,77 +157,57 @@ class HomeFragment : Fragment() {
 
     }
 
-    private fun FragmentHomeBinding.bindRecyclerView() {
-        initCompositeAdapter()
-        initCategories()
+    private fun FragmentHomeBinding.bindRecyclerView(
+        hotItems: List<HotItem>?,
+        bestSellers: List<BestSellerItem>?
+    ) {
+        initCompositeAdapter(bestSellers = bestSellers)
 
         recyclerView.adapter = compositeAdapter
-        viewLifecycleOwner.lifecycleScope.launch {
-                homeViewModel.homePage.collect { page ->
-                    when (page) {
-                        is NetworkResult.Success -> {
-                            progressBar.visibility = View.GONE
-                            layout.visibility = View.VISIBLE
-                            compositeAdapter.submitList(
-                                listOf(
-                                    SelectCategoryListItem(
-                                        categories = categories
-                                    ),
-                                    SearchFieldItem(),
-                                    HotSalesListItem(
-                                        items = page.data?.hotItems
-                                    ),
-                                    BestSellersListItem(
-                                        bestSellers = page.data?.bestSellers
-                                    )
-                                )
-                            )
-                        }
-                        is NetworkResult.Loading -> {
-                            progressBar.visibility = View.VISIBLE
-                            layout.visibility = View.GONE
-                        }
-                        is NetworkResult.Error -> {}
+        recyclerView.adapter?.stateRestorationPolicy = StateRestorationPolicy.PREVENT_WHEN_EMPTY
+        compositeAdapter.submitList(
+            listOf(
+                SelectCategoryListItem(
+                    categories = categories
+                ),
+                SearchFieldItem(),
+                HotSalesListItem(
+                    items = hotItems
+                ),
+                BestSellersListItem(
+                    bestSellers = bestSellers,
+                    likeClickListener = { pos ->
+                        val item = bestSellers?.get(pos)
+                        item?.isFavorites = !(item?.isFavorites ?: false)
+                        val bestSellerDelegateViewHolder =
+                            recyclerView.findViewHolderForAdapterPosition(3) as BestSellerDelegateAdapter.BestSellerDelegateViewHolder
+                        val bestSellerDelegateRecyclerView: RecyclerView =
+                            bestSellerDelegateViewHolder.binding.recyclerView
+                        bestSellerDelegateRecyclerView.adapter?.notifyItemChanged(pos,item)
+                    },
+                    navigationClickListener = { url ->
+                        val deeplink =
+                            NavDeepLinkRequest.Builder.fromUri(CONST_DEEPLINK_SMARTPHONE.toUri()).build()
+                        findNavController().navigate(deeplink)
+
                     }
-                }
-        }
+                )
+            )
+        )
     }
 
-    private fun initCompositeAdapter() {
+    private fun initCompositeAdapter(bestSellers: List<BestSellerItem>?) {
         val selectCategoryDelegateAdapter = SelectCategoryDelegateAdapter(
             clickListener = {},
-            marginRight = TypedValue.applyDimension(
-                TypedValue.COMPLEX_UNIT_DIP,
-                27F,
-                resources.displayMetrics
-            ).toInt(),
-            marginLeft = TypedValue.applyDimension(
-                TypedValue.COMPLEX_UNIT_DIP,
-                27F,
-                resources.displayMetrics
-            ).toInt()
+            marginRight = resources.getDp(pixels = 27F).toInt(),
+            marginLeft = resources.getDp(pixels = 27F).toInt()
         )
         val searchFieldDelegateAdapter = SearchFieldDelegateAdapter(editTextListener = {})
         val hotSalesDelegateAdapter = HotSalesDelegateAdapter(clickListener = {})
         val bestSellerDelegateAdapter = BestSellerDelegateAdapter(
-            likeClickListener = {},
-            navigationClickListener = { url ->
-                val deeplink =
-                    NavDeepLinkRequest.Builder.fromUri("myapp://details/smartphone".toUri()).build()
-                findNavController().navigate(deeplink)
-
-            },
             gridLayoutManager = GridLayoutManager(requireContext(), 2),
-            marginLeft = TypedValue.applyDimension(
-                TypedValue.COMPLEX_UNIT_DIP,
-                17F,
-                resources.displayMetrics
-            ).toInt(),
-            marginRight = TypedValue.applyDimension(
-                TypedValue.COMPLEX_UNIT_DIP,
-                21F,
-                resources.displayMetrics
-            ).toInt()
+            marginLeft = resources.getDp(pixels = 17F).toInt(),
+            marginRight = resources.getDp(pixels = 21F).toInt()
         )
         compositeAdapter = CompositeAdapter.Builder()
             .add(selectCategoryDelegateAdapter)

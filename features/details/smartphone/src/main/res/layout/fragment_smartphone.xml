@@ -205,24 +205,16 @@
                     android:layout_marginStart="36dp"
                     android:layout_marginBottom="10dp"
                     android:text="@string/selector"
-                    app:layout_constraintBottom_toTopOf="@id/background_color1"
+                    app:layout_constraintBottom_toTopOf="@id/card_color1"
                     app:layout_constraintStart_toStartOf="parent" />
 
-                <Button
-                    android:id="@+id/button_color1"
-                    style="@style/TouchRipple"
-                    app:layout_constraintBottom_toBottomOf="@id/background_color1"
-                    app:layout_constraintEnd_toEndOf="@id/background_color1"
-                    app:layout_constraintStart_toStartOf="@id/background_color1"
-                    app:layout_constraintTop_toTopOf="@id/background_color1"
-                    tools:ignore="DuplicateSpeakableTextCheck" />
-
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/background_color1"
+                    android:id="@+id/card_color1"
                     android:layout_width="39dp"
                     android:layout_height="39dp"
                     android:layout_marginStart="34.5dp"
                     android:layout_marginBottom="10dp"
+                    android:foreground="?android:attr/selectableItemBackground"
                     app:cardCornerRadius="33dp"
                     app:cardElevation="0dp"
                     app:layout_constraintBottom_toTopOf="@id/button_add_to_cart"
@@ -233,30 +225,22 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/ic_check_mark"
-                    app:layout_constraintBottom_toBottomOf="@id/background_color1"
-                    app:layout_constraintEnd_toEndOf="@id/background_color1"
-                    app:layout_constraintStart_toStartOf="@id/background_color1"
-                    app:layout_constraintTop_toTopOf="@id/background_color1" />
-
-                <Button
-                    android:id="@+id/button_color2"
-                    style="@style/TouchRipple"
-                    app:layout_constraintBottom_toBottomOf="@id/background_color2"
-                    app:layout_constraintEnd_toEndOf="@id/background_color2"
-                    app:layout_constraintStart_toStartOf="@id/background_color2"
-                    app:layout_constraintTop_toTopOf="@id/background_color2"
-                    tools:ignore="DuplicateSpeakableTextCheck" />
+                    app:layout_constraintBottom_toBottomOf="@id/card_color1"
+                    app:layout_constraintEnd_toEndOf="@id/card_color1"
+                    app:layout_constraintStart_toStartOf="@id/card_color1"
+                    app:layout_constraintTop_toTopOf="@id/card_color1" />
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/background_color2"
+                    android:id="@+id/card_color2"
                     android:layout_width="39dp"
                     android:layout_height="39dp"
                     android:layout_marginStart="18.5dp"
+                    android:foreground="?android:attr/selectableItemBackground"
                     app:cardCornerRadius="33dp"
                     app:cardElevation="0dp"
-                    app:layout_constraintBottom_toBottomOf="@id/background_color1"
-                    app:layout_constraintStart_toEndOf="@id/background_color1"
-                    app:layout_constraintTop_toTopOf="@id/background_color1" />
+                    app:layout_constraintBottom_toBottomOf="@id/card_color1"
+                    app:layout_constraintStart_toEndOf="@id/card_color1"
+                    app:layout_constraintTop_toTopOf="@id/card_color1" />
 
                 <ImageView
                     android:id="@+id/image_check_mark2"
@@ -264,10 +248,10 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/ic_check_mark"
                     android:visibility="gone"
-                    app:layout_constraintBottom_toBottomOf="@id/background_color2"
-                    app:layout_constraintEnd_toEndOf="@id/background_color2"
-                    app:layout_constraintStart_toStartOf="@id/background_color2"
-                    app:layout_constraintTop_toTopOf="@id/background_color2" />
+                    app:layout_constraintBottom_toBottomOf="@id/card_color2"
+                    app:layout_constraintEnd_toEndOf="@id/card_color2"
+                    app:layout_constraintStart_toStartOf="@id/card_color2"
+                    app:layout_constraintTop_toTopOf="@id/card_color2" />
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/card_memory1"
@@ -301,9 +285,9 @@
                     android:foreground="?android:attr/selectableItemBackground"
                     app:cardCornerRadius="10dp"
                     app:cardElevation="0dp"
-                    app:layout_constraintBottom_toBottomOf="@id/background_color1"
+                    app:layout_constraintBottom_toBottomOf="@id/card_color1"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/background_color1" />
+                    app:layout_constraintTop_toTopOf="@id/card_color1" />
 
                 <TextView
                     android:id="@+id/text_memory2"
@@ -322,6 +306,7 @@
                     android:layout_height="48dp"
                     android:layout_marginHorizontal="30dp"
                     android:layout_marginBottom="10dp"
+                    android:foreground="?android:attr/selectableItemBackground"
                     app:cardBackgroundColor="?colorPrimary"
                     app:cardCornerRadius="10dp"
                     app:cardElevation="0dp"

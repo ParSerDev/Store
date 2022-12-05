@@ -3,11 +3,9 @@ package com.parserdev.store.home.presentation
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.parserdev.store.data.repository.cart.CartRepository
 import com.parserdev.store.data.repository.home.HomeRepository
 import com.parserdev.store.domain.models.home.HomeCategory
 import com.parserdev.store.domain.models.home.HomePage
-import com.parserdev.store.domain.models.cart.CartContent
 import com.parserdev.store.domain.network.NetworkResult
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
@@ -21,7 +19,7 @@ class HomeViewModel @AssistedInject constructor(
 
     var state: StateFlow<HomeState>
     var homePage: Flow<NetworkResult<HomePage?>>
-    val accept: (HomeAction) -> Unit
+    private val accept: (HomeAction) -> Unit
 
     val locationsList = listOf(
         Location.Gro.name, Location.Moscow.name

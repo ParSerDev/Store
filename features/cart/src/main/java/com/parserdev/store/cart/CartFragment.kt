@@ -50,13 +50,13 @@ class CartFragment : Fragment() {
     }
 
     private fun FragmentCartBinding.bindState() {
+        bindNavigation()
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 cartViewModel.cartContent.collect { networkResult ->
                     when (networkResult) {
                         is NetworkResult.Success -> {
                             val data = networkResult.data
-                            bindNavigation()
                             bindRecyclerView(cartItems = data?.cartItems)
                             bindPrice(totalPrice = data?.total, deliveryPrice = data?.delivery)
                             progressBar.visibility = View.GONE
@@ -71,8 +71,6 @@ class CartFragment : Fragment() {
                 }
             }
         }
-        recyclerView.adapter?.stateRestorationPolicy =
-            StateRestorationPolicy.PREVENT_WHEN_EMPTY
     }
 
     private fun FragmentCartBinding.bindRecyclerView(
@@ -84,8 +82,8 @@ class CartFragment : Fragment() {
                 deleteClickListener = {},
                 addItemClickListener = {},
                 removeItemClickListener = {},
-                marginTop = resources.getDp(pixels = 34F),
-                marginBottom = resources.getDp(pixels = 34F)
+                marginTop = resources.getDp(pixels = 34F).toInt(),
+                marginBottom = resources.getDp(pixels = 34F).toInt()
             )
     }
 

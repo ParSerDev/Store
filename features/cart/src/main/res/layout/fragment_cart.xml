@@ -135,6 +135,7 @@
                 android:layout_height="54dp"
                 android:layout_marginHorizontal="44dp"
                 android:layout_marginBottom="44dp"
+                android:foreground="?android:attr/selectableItemBackground"
                 app:cardBackgroundColor="?colorPrimary"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="0dp"

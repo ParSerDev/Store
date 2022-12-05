@@ -2,7 +2,7 @@ package com.parserdev.store.domain.models.home
 
 data class BestSellerItem(
 
-    val isFavorites: Boolean? = null,
+    var isFavorites: Boolean? = null,
     val discountPrice: Int? = null,
     val id: Int? = null,
     val title: String? = null,

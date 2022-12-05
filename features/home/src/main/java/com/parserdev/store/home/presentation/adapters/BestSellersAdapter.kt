@@ -4,21 +4,21 @@ import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.view.ViewGroup.MarginLayoutParams
-import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.parserdev.store.data.dto.home.FavouriteItemDto
+import com.parserdev.store.domain.models.cart.CartItem
 import com.parserdev.store.domain.models.home.BestSellerItem
 import com.parserdev.store.home.databinding.ItemBestSellerBinding
 import com.parserdev.ui_components.R
 import java.text.NumberFormat
 import java.util.*
 
+
 class BestSellersAdapter(
     val bestSellers: List<BestSellerItem>?,
-    val likeClickListener: (FavouriteItemDto) -> Unit,
+    val likeClickListener: (Int) -> Unit,
     val navigationClickListener: (String) -> Unit,
     val marginLeft: Int,
     val marginRight: Int
@@ -51,7 +51,6 @@ class BestSellersAdapter(
             .inflate(LayoutInflater.from(parent.context), parent, false)
         return BestSellersViewHolder(binding)
     }
-
     override fun onBindViewHolder(holder: BestSellersViewHolder, position: Int) {
         val adapterPosition = holder.bindingAdapterPosition
         holder.binding.apply {
@@ -74,7 +73,7 @@ class BestSellersAdapter(
                     true -> image.setImageResource(R.drawable.ic_heart_primary_active)
                     else -> image.setImageResource(R.drawable.ic_heart_primary_inactive)
                 }
-                button.setOnClickListener { likeClickListener }
+                button.setOnClickListener { likeClickListener.invoke(adapterPosition ) }
                 cardItem.setOnClickListener { navigationClickListener.invoke("https://run.mocky.io/v3/6c14c560-15c6-4248-b9d2-b4508df7d4f5") }
                 if (adapterPosition % 2 == 0) {
                     (cardItem.layoutParams as MarginLayoutParams).leftMargin = marginLeft

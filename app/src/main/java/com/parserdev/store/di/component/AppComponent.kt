@@ -1,7 +1,6 @@
 package com.parserdev.store.di.component
 
 import android.content.Context
-import com.parserdev.store.data.di.modules.DatabaseModule
 import com.parserdev.store.data.di.modules.NetworkModule
 import com.parserdev.store.data.di.modules.RepositoryModule
 import com.parserdev.store.di.app.AppSubcomponents
@@ -14,7 +13,7 @@ import javax.inject.Singleton
 
 @Singleton
 @Component(
-    modules = [NetworkModule::class, DatabaseModule::class,
+    modules = [NetworkModule::class,
         RepositoryModule::class,
         AppSubcomponents::class]
 )

@@ -5,6 +5,7 @@ import android.content.res.Resources
 import android.util.TypedValue
 import androidx.annotation.AttrRes
 import androidx.annotation.ColorInt
+import androidx.core.content.ContentProviderCompat.requireContext
 import java.text.NumberFormat
 import java.util.*
 
@@ -29,10 +30,13 @@ fun formatCurrency(
     return format.format(price)
 }
 
-fun Resources.getDp(pixels: Float): Int {
+fun Resources.getDp(pixels: Float): Float {
     return TypedValue.applyDimension(
         TypedValue.COMPLEX_UNIT_DIP,
         pixels,
         displayMetrics
-    ).toInt()
+    )
 }
+
+const val CONST_DEEPLINK_SMARTPHONE = "store://details/smartphone"
+const val CONST_DEEPLINK_CART = "store://cart"

@@ -1,7 +1,5 @@
 package com.parserdev.store.data.repository.home
 
-import com.parserdev.store.data.database.StoreDatabase
-import com.parserdev.store.data.dto.home.FavouriteItemDto
 import com.parserdev.store.data.network.NetworkInstance
 import com.parserdev.store.data.utils.safeApiCall
 import com.parserdev.store.domain.models.home.CartItemsAmount
@@ -13,7 +11,7 @@ import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class HomeRepositoryImpl @Inject constructor(
-    private val networkInstance: NetworkInstance, private val database: StoreDatabase
+    private val networkInstance: NetworkInstance
 ) : HomeRepository {
 
     override suspend fun getHomePage(homeCategory: HomeCategory): Flow<NetworkResult<HomePage?>> {
@@ -59,17 +57,6 @@ class HomeRepositoryImpl @Inject constructor(
         }
 
     }
-
-    override suspend fun insertFavouriteItemDto(favouriteItemDto: FavouriteItemDto) {
-        database.homeDao().insertFavouriteItemDto(favouriteItemDto = favouriteItemDto)
-    }
-
-    override suspend fun deleteFavouriteItemDto(favouriteItemDto: FavouriteItemDto) {
-        database.homeDao().deleteFavouriteItemDto(favouriteItemDto = favouriteItemDto)
-    }
-
-    override suspend fun isFavouriteItemDtoExists(id: Int, homeCategory: HomeCategory) =
-        database.homeDao().isFavouriteItemDtoExists(id = id, homeCategory = homeCategory)
 
 }
 

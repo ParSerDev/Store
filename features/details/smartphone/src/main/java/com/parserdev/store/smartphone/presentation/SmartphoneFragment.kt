@@ -191,58 +191,58 @@ class SmartphoneFragment : Fragment() {
         color2: String
     ) {
         fun selectColor(
-            button: Button,
+            card: CardView,
             imageView: ImageView
         ) {
             imageView.visibility = View.VISIBLE
-            button.isClickable = false
+            card.isClickable = false
 
         }
 
         fun deselectColor(
-            button: Button,
+            card: CardView,
             imageView: ImageView
         ) {
             imageView.visibility = View.GONE
-            button.isClickable = true
+            card.isClickable = true
         }
-        backgroundColor1.setCardBackgroundColor(
+        cardColor1.setCardBackgroundColor(
             Color.parseColor(
                 color1
             )
         )
-        backgroundColor2.setCardBackgroundColor(
+        cardColor2.setCardBackgroundColor(
             Color.parseColor(
                 color2
             )
         )
-        buttonColor1.setOnClickListener {
+        cardColor1.setOnClickListener {
             smartphoneViewModel.accept(
                 SmartphoneAction.UpdatePurchaseColor(
                     color = color1
                 )
             )
             selectColor(
-                button = buttonColor1,
+                card = cardColor1,
                 imageView = imageCheckMark1
             )
             deselectColor(
-                button = buttonColor2,
+                card = cardColor2,
                 imageView = imageCheckMark2
             )
         }
-        buttonColor2.setOnClickListener {
+        cardColor2.setOnClickListener {
             smartphoneViewModel.accept(
                 SmartphoneAction.UpdatePurchaseColor(
                     color = color2
                 )
             )
             selectColor(
-                button = buttonColor2,
+                card = cardColor2,
                 imageView = imageCheckMark2
             )
             deselectColor(
-                button = buttonColor1,
+                card = cardColor1,
                 imageView = imageCheckMark1
             )
         }

@@ -4,15 +4,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.parserdev.store.data.dto.home.FavouriteItemDto
 import com.parserdev.store.home.databinding.ItemDelegateBestSellerBinding
 import com.parserdev.store.home.presentation.adapters.delegate.DelegateAdapter
 import com.parserdev.store.home.presentation.adapters.delegate.DelegateAdapterItem
 import com.parserdev.store.home.presentation.adapters.model.BestSellersListItem
 
 class BestSellerDelegateAdapter(
-    private val likeClickListener: (FavouriteItemDto) -> Unit,
-    private val navigationClickListener: (String) -> Unit,
     private val gridLayoutManager: GridLayoutManager,
     private val marginLeft: Int,
     private val marginRight: Int
@@ -25,8 +22,6 @@ class BestSellerDelegateAdapter(
             ItemDelegateBestSellerBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return BestSellerDelegateViewHolder(
             binding = binding,
-            likeClickListener = likeClickListener,
-            navigationClickListener = navigationClickListener,
             gridLayoutManager = gridLayoutManager,
             marginLeft = marginLeft,
             marginRight = marginRight
@@ -42,10 +37,8 @@ class BestSellerDelegateAdapter(
     }
 
     class BestSellerDelegateViewHolder(
-        private val binding: ItemDelegateBestSellerBinding,
+        val binding: ItemDelegateBestSellerBinding,
         private val gridLayoutManager: GridLayoutManager,
-        private val likeClickListener: (FavouriteItemDto) -> Unit,
-        private val navigationClickListener: (String) -> Unit,
         private val marginLeft: Int,
         private val marginRight: Int
     ) :
@@ -56,8 +49,8 @@ class BestSellerDelegateAdapter(
                 recyclerView.layoutManager = gridLayoutManager
                 recyclerView.adapter = BestSellersAdapter(
                     bestSellers = item.bestSellers,
-                    likeClickListener = likeClickListener,
-                    navigationClickListener = navigationClickListener,
+                    likeClickListener = item.likeClickListener,
+                    navigationClickListener = item.navigationClickListener,
                     marginLeft = marginLeft,
                     marginRight = marginRight
                 )
