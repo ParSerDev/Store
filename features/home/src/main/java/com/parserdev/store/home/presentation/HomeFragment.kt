@@ -9,10 +9,12 @@ import android.widget.ArrayAdapter
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavDeepLinkRequest
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter.StateRestorationPolicy
 import com.parserdev.store.domain.models.home.BestSellerItem
@@ -24,6 +26,7 @@ import com.parserdev.store.home.databinding.FragmentHomeBinding
 import com.parserdev.store.home.di.HomeComponentProvider
 import com.parserdev.store.home.presentation.adapters.*
 import com.parserdev.store.home.presentation.adapters.delegate.CompositeAdapter
+import com.parserdev.store.home.presentation.adapters.delegate.DelegateAdapterItem
 import com.parserdev.store.home.presentation.adapters.model.BestSellersListItem
 import com.parserdev.store.home.presentation.adapters.model.HotSalesListItem
 import com.parserdev.store.home.presentation.adapters.model.SearchFieldItem
@@ -33,6 +36,9 @@ import com.parserdev.store.utility.CONST_DEEPLINK_SMARTPHONE
 import com.parserdev.store.utility.getColorFromAttr
 import com.parserdev.store.utility.getDp
 import com.parserdev.ui_components.R
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -69,26 +75,7 @@ class HomeFragment : Fragment() {
         bindSpinners()
         bindBottomBar()
         bindFilter()
-        viewLifecycleOwner.lifecycleScope.launch {
-            homeViewModel.homePage.collect { networkResult ->
-                when (networkResult) {
-                    is NetworkResult.Success -> {
-                        val data = networkResult.data
-                        bindRecyclerView(
-                            hotItems = data?.hotItems,
-                            bestSellers = data?.bestSellers
-                        )
-                        progressBar.visibility = View.GONE
-                        layout.visibility = View.VISIBLE
-                    }
-                    is NetworkResult.Loading -> {
-                        progressBar.visibility = View.VISIBLE
-                        layout.visibility = View.GONE
-                    }
-                    is NetworkResult.Error -> {}
-                }
-            }
-        }
+        bindRecyclerView()
     }
 
     private fun FragmentHomeBinding.bindFilter() {
@@ -160,47 +147,64 @@ class HomeFragment : Fragment() {
     }
 
     private fun FragmentHomeBinding.bindRecyclerView(
-        hotItems: List<HotItem>?,
-        bestSellers: List<BestSellerItem>?
     ) {
         initCompositeAdapter()
-
         recyclerView.adapter = compositeAdapter
         recyclerView.adapter?.stateRestorationPolicy = StateRestorationPolicy.PREVENT_WHEN_EMPTY
-        compositeAdapter.submitList(
-            listOf(
-                SelectCategoryListItem(
-                    categories = categories,
-                    clickListener = {}
-                ),
-                SearchFieldItem(
-                    editTextListener = {}
-                ),
-                HotSalesListItem(
-                    items = hotItems,
-                    clickListener = {}
-                ),
-                BestSellersListItem(
-                    bestSellers = bestSellers,
-                    likeClickListener = { pos ->
-                        val item = bestSellers?.get(pos)
-                        item?.isFavorites = !(item?.isFavorites ?: false)
-                        val bestSellerDelegateViewHolder =
-                            recyclerView.findViewHolderForAdapterPosition(3) as BestSellerDelegateAdapter.BestSellerDelegateViewHolder
-                        val bestSellerDelegateRecyclerView: RecyclerView =
-                            bestSellerDelegateViewHolder.binding.recyclerView
-                        bestSellerDelegateRecyclerView.adapter?.notifyItemChanged(pos, item)
-                    },
-                    navigationClickListener = { url ->
-                        val deeplink =
-                            NavDeepLinkRequest.Builder.fromUri(CONST_DEEPLINK_SMARTPHONE.toUri())
-                                .build()
-                        findNavController().navigate(deeplink)
+        homeViewModel.homePage.flowWithLifecycle(lifecycle).distinctUntilChanged()
+            .onEach { networkResult ->
+                when (networkResult) {
+                    is NetworkResult.Success -> {
+                        val data = networkResult.data
+                        (binding.recyclerView.adapter as ListAdapter<DelegateAdapterItem, RecyclerView.ViewHolder>).submitList(
+                            listOf(
+                                SelectCategoryListItem(
+                                    categories = categories,
+                                    clickListener = {}
+                                ),
+                                SearchFieldItem(
+                                    editTextListener = {}
+                                ),
+                                HotSalesListItem(
+                                    items = data?.hotItems,
+                                    clickListener = {}
+                                ),
+                                BestSellersListItem(
+                                    bestSellers = data?.bestSellers,
+                                    likeClickListener = { pos ->
+                                        val item = data?.bestSellers?.get(pos)
+                                        item?.isFavorites = !(item?.isFavorites ?: false)
+                                        val bestSellerDelegateViewHolder =
+                                            recyclerView.findViewHolderForAdapterPosition(3) as BestSellerDelegateAdapter.BestSellerDelegateViewHolder
+                                        val bestSellerDelegateRecyclerView: RecyclerView =
+                                            bestSellerDelegateViewHolder.binding.recyclerView
+                                        bestSellerDelegateRecyclerView.adapter?.notifyItemChanged(
+                                            pos,
+                                            item
+                                        )
+                                    },
+                                    navigationClickListener = { url ->
+                                        val deeplink =
+                                            NavDeepLinkRequest.Builder.fromUri(
+                                                CONST_DEEPLINK_SMARTPHONE.toUri()
+                                            )
+                                                .build()
+                                        findNavController().navigate(deeplink)
 
+                                    }
+                                )
+                            )
+                        )
+                        progressBar.visibility = View.GONE
+                        layout.visibility = View.VISIBLE
                     }
-                )
-            )
-        )
+                    is NetworkResult.Loading -> {
+                        progressBar.visibility = View.VISIBLE
+                        layout.visibility = View.GONE
+                    }
+                    is NetworkResult.Error -> {}
+                }
+            }.launchIn(lifecycleScope)
     }
 
     private fun initCompositeAdapter() {
