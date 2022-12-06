@@ -68,6 +68,7 @@ class HomeFragment : Fragment() {
         injectHomeComponent()
         provideViewModel()
         initCategories()
+        initCompositeAdapter()
         binding.bindState()
     }
 
@@ -148,7 +149,6 @@ class HomeFragment : Fragment() {
 
     private fun FragmentHomeBinding.bindRecyclerView(
     ) {
-        initCompositeAdapter()
         recyclerView.adapter = compositeAdapter
         recyclerView.adapter?.stateRestorationPolicy = StateRestorationPolicy.PREVENT_WHEN_EMPTY
         homeViewModel.homePage.flowWithLifecycle(lifecycle).distinctUntilChanged()
