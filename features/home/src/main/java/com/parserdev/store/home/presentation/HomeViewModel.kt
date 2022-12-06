@@ -62,7 +62,7 @@ class HomeViewModel @AssistedInject constructor(
         }
             .stateIn(
                 scope = viewModelScope,
-                started = SharingStarted.WhileSubscribed(stopTimeoutMillis = 5000),
+                started = SharingStarted.Lazily,
                 initialValue = HomeState()
             )
         accept = { action ->
@@ -73,7 +73,7 @@ class HomeViewModel @AssistedInject constructor(
             homeRepository.getHomePage(homeCategory = homeState.category)
         }.stateIn(
             scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(5000L),
+            started = SharingStarted.Lazily,
             initialValue = NetworkResult.Loading()
         )
     }

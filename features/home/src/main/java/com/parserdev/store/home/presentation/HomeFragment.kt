@@ -151,8 +151,8 @@ class HomeFragment : Fragment() {
     ) {
         recyclerView.adapter = compositeAdapter
         recyclerView.adapter?.stateRestorationPolicy = StateRestorationPolicy.PREVENT_WHEN_EMPTY
-        homeViewModel.homePage.flowWithLifecycle(lifecycle).distinctUntilChanged()
-            .onEach { networkResult ->
+        lifecycleScope.launchWhenStarted {
+            homeViewModel.homePage.collect { networkResult ->
                 when (networkResult) {
                     is NetworkResult.Success -> {
                         val data = networkResult.data
@@ -204,7 +204,8 @@ class HomeFragment : Fragment() {
                     }
                     is NetworkResult.Error -> {}
                 }
-            }.launchIn(lifecycleScope)
+            }
+        }
     }
 
     private fun initCompositeAdapter() {
