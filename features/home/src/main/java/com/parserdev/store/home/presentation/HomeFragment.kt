@@ -292,6 +292,6 @@ class HomeFragment : Fragment() {
     private fun provideViewModel() {
         val viewModelFactory = homeAssistedViewModelFactory.create(this)
         homeViewModel =
-            ViewModelProvider(requireActivity(), viewModelFactory)[HomeViewModel::class.java]
+            ViewModelProvider(this, viewModelFactory)[HomeViewModel::class.java]
     }
 }
