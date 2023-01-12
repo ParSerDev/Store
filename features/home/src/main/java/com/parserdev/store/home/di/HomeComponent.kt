@@ -1,6 +1,7 @@
 package com.parserdev.store.home.di
 
 import com.parserdev.store.home.di.scopes.HomeScope
+import com.parserdev.store.home.presentation.CartFragment
 import com.parserdev.store.home.presentation.HomeFragment
 import dagger.Subcomponent
 
@@ -13,4 +14,5 @@ interface HomeComponent {
     }
 
     fun inject(homeFragment: HomeFragment)
+    fun inject(cartFragment: CartFragment)
 }

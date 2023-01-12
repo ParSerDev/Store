@@ -1,7 +1,7 @@
 package com.parserdev.store.data.dto.details
 
 import com.google.gson.annotations.SerializedName
-import com.parserdev.store.domain.models.details.PhoneDetails
+import com.parserdev.store.domain.models.details.SmartphoneDetails
 
 data class SmartphoneDetailsDto(
 
@@ -40,19 +40,4 @@ data class SmartphoneDetailsDto(
 
     @field:SerializedName("capacity")
     val capacity: List<String?>? = null
-) {
-    fun mapToDomainModel() = PhoneDetails(
-        sd,
-        images,
-        color,
-        ssd,
-        price,
-        rating,
-        cPU,
-        isFavorites,
-        id,
-        camera,
-        title,
-        capacity
-    )
-}
+)

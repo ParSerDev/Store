@@ -36,6 +36,7 @@ import com.parserdev.store.utility.CONST_DEEPLINK_SMARTPHONE
 import com.parserdev.store.utility.getColorFromAttr
 import com.parserdev.store.utility.getDp
 import com.parserdev.ui_components.R
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -46,7 +47,12 @@ class HomeFragment : Fragment() {
 
     @Inject
     lateinit var homeAssistedViewModelFactory: HomeViewModelAssistedFactory
-    private lateinit var homeViewModel: HomeViewModel
+    private val homeViewModel: HomeViewModel by lazy {
+        ViewModelProvider(
+            requireActivity(),
+            homeAssistedViewModelFactory.create(requireActivity())
+        )[HomeViewModel::class.java]
+    }
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
@@ -66,7 +72,6 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         injectHomeComponent()
-        provideViewModel()
         initCategories()
         initCompositeAdapter()
         binding.bindState()
@@ -152,57 +157,73 @@ class HomeFragment : Fragment() {
         recyclerView.adapter = compositeAdapter
         recyclerView.adapter?.stateRestorationPolicy = StateRestorationPolicy.PREVENT_WHEN_EMPTY
         lifecycleScope.launchWhenStarted {
-            homeViewModel.homePage.collect { networkResult ->
-                when (networkResult) {
-                    is NetworkResult.Success -> {
-                        val data = networkResult.data
-                        (binding.recyclerView.adapter as ListAdapter<DelegateAdapterItem, RecyclerView.ViewHolder>).submitList(
-                            listOf(
-                                SelectCategoryListItem(
-                                    categories = categories,
-                                    clickListener = {}
-                                ),
-                                SearchFieldItem(
-                                    editTextListener = {}
-                                ),
-                                HotSalesListItem(
-                                    items = data?.hotItems,
-                                    clickListener = {}
-                                ),
-                                BestSellersListItem(
-                                    bestSellers = data?.bestSellers,
-                                    likeClickListener = { pos ->
-                                        val item = data?.bestSellers?.get(pos)
-                                        item?.isFavorites = !(item?.isFavorites ?: false)
-                                        val bestSellerDelegateViewHolder =
-                                            recyclerView.findViewHolderForAdapterPosition(3) as BestSellerDelegateAdapter.BestSellerDelegateViewHolder
-                                        val bestSellerDelegateRecyclerView: RecyclerView =
-                                            bestSellerDelegateViewHolder.binding.recyclerView
-                                        bestSellerDelegateRecyclerView.adapter?.notifyItemChanged(
-                                            pos,
-                                            item
-                                        )
-                                    },
-                                    navigationClickListener = { url ->
-                                        val deeplink =
-                                            NavDeepLinkRequest.Builder.fromUri(
-                                                CONST_DEEPLINK_SMARTPHONE.toUri()
+            launch {
+                homeViewModel.cartContent.collect { networkResult ->
+                    when (networkResult) {
+                        is NetworkResult.Success -> {
+                            binding.bottomBar.cardCartItems.visibility = View.VISIBLE
+                            binding.bottomBar.textCartItems.text = networkResult.data?.cartItems?.size.toString()
+                        }
+                        is NetworkResult.Error -> {
+                        }
+                        is NetworkResult.Loading -> {
+                        }
+                    }
+                }
+            }
+            launch {
+                homeViewModel.homePage.collect { networkResult ->
+                    when (networkResult) {
+                        is NetworkResult.Success -> {
+                            val data = networkResult.data
+                            (binding.recyclerView.adapter as ListAdapter<DelegateAdapterItem, RecyclerView.ViewHolder>).submitList(
+                                listOf(
+                                    SelectCategoryListItem(
+                                        categories = categories,
+                                        clickListener = {}
+                                    ),
+                                    SearchFieldItem(
+                                        editTextListener = {}
+                                    ),
+                                    HotSalesListItem(
+                                        items = data?.hotItems,
+                                        clickListener = {}
+                                    ),
+                                    BestSellersListItem(
+                                        bestSellers = data?.bestSellers,
+                                        likeClickListener = { pos ->
+                                            val item = data?.bestSellers?.get(pos)
+                                            item?.isFavorites = !(item?.isFavorites ?: false)
+                                            val bestSellerDelegateViewHolder =
+                                                recyclerView.findViewHolderForAdapterPosition(3) as BestSellerDelegateAdapter.BestSellerDelegateViewHolder
+                                            val bestSellerDelegateRecyclerView: RecyclerView =
+                                                bestSellerDelegateViewHolder.binding.recyclerView
+                                            bestSellerDelegateRecyclerView.adapter?.notifyItemChanged(
+                                                pos,
+                                                item
                                             )
-                                                .build()
-                                        findNavController().navigate(deeplink)
+                                        },
+                                        navigationClickListener = { url ->
+                                            val deeplink =
+                                                NavDeepLinkRequest.Builder.fromUri(
+                                                    CONST_DEEPLINK_SMARTPHONE.toUri()
+                                                )
+                                                    .build()
+                                            findNavController().navigate(deeplink)
 
-                                    }
+                                        }
+                                    )
                                 )
                             )
-                        )
-                        progressBar.visibility = View.GONE
-                        layout.visibility = View.VISIBLE
+                            progressBar.visibility = View.GONE
+                            layout.visibility = View.VISIBLE
+                        }
+                        is NetworkResult.Loading -> {
+                            progressBar.visibility = View.VISIBLE
+                            layout.visibility = View.GONE
+                        }
+                        is NetworkResult.Error -> {}
                     }
-                    is NetworkResult.Loading -> {
-                        progressBar.visibility = View.VISIBLE
-                        layout.visibility = View.GONE
-                    }
-                    is NetworkResult.Error -> {}
                 }
             }
         }
@@ -287,11 +308,5 @@ class HomeFragment : Fragment() {
         val homeComponent =
             (activity?.application as HomeComponentProvider).provideHomeComponent()
         homeComponent.inject(this)
-    }
-
-    private fun provideViewModel() {
-        val viewModelFactory = homeAssistedViewModelFactory.create(this)
-        homeViewModel =
-            ViewModelProvider(this, viewModelFactory)[HomeViewModel::class.java]
     }
 }

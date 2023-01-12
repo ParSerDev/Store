@@ -24,7 +24,7 @@
 
     <fragment
         android:id="@+id/fragment_cart"
-        android:name="com.parserdev.store.cart.CartFragment"
+        android:name="com.parserdev.store.home.presentation.CartFragment"
         android:label="CartFragment">
         <deepLink
             android:id="@+id/deepLink"

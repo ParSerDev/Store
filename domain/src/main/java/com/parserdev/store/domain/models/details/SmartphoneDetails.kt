@@ -1,6 +1,6 @@
 package com.parserdev.store.domain.models.details
 
-data class PhoneDetails(
+data class SmartphoneDetails(
 	val sd: String? = null,
 	val images: List<String?>? = null,
 	val color: List<String?>? = null,

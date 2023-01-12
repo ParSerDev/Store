@@ -10,7 +10,7 @@ import com.parserdev.store.home.di.HomeComponentProvider
 import com.parserdev.store.smartphone.di.SmartphoneComponent
 import com.parserdev.store.smartphone.di.SmartphoneComponentProvider
 
-open class App : Application(), CartComponentProvider, HomeComponentProvider,
+open class App : Application(), HomeComponentProvider,
     SmartphoneComponentProvider {
     private val appComponent: AppComponent by lazy {
         initializeComponent()
@@ -22,10 +22,6 @@ open class App : Application(), CartComponentProvider, HomeComponentProvider,
 
     override fun provideHomeComponent(): HomeComponent {
         return appComponent.homeComponent().create()
-    }
-
-    override fun provideCartComponent(): CartComponent {
-        return appComponent.cartComponent().create()
     }
 
     override fun provideSmartphoneComponent(): SmartphoneComponent {

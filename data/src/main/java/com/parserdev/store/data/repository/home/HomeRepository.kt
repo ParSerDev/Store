@@ -8,5 +8,4 @@ import kotlinx.coroutines.flow.Flow
 
 interface HomeRepository {
     suspend fun getHomePage(homeCategory: HomeCategory): Flow<NetworkResult<HomePage?>>
-    suspend fun getCartItemsAmount(): NetworkResult<CartItemsAmount?>
 }

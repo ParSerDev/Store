@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/layout_bottom_bar"
     android:layout_width="match_parent"
@@ -13,8 +14,8 @@
         android:layout_width="8dp"
         android:layout_height="8dp"
         android:layout_marginStart="68dp"
-        app:cardBackgroundColor="@color/white_000"
         app:cardCornerRadius="50dp"
+        app:cardBackgroundColor="@color/white_000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -35,10 +36,27 @@
         android:layout_height="18dp"
         android:layout_marginStart="113dp"
         android:background="@drawable/ic_cart"
-        android:contentDescription="@string/description_cart"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/card_dot"
         app:layout_constraintTop_toTopOf="parent" />
+    
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_cart_items"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:visibility="gone"
+        app:cardElevation="0dp"
+        app:cardBackgroundColor="?colorPrimary"
+        app:cardCornerRadius="50dp"
+        app:layout_constraintBottom_toTopOf="@id/image_cart"
+        app:layout_constraintStart_toEndOf="@id/image_cart">
+        <TextView
+            android:id="@+id/text_cart_items"
+            style="@style/Text.BottomBar.CartItems"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </androidx.cardview.widget.CardView>
 
     <Button
         android:id="@+id/button_cart"
@@ -55,7 +73,6 @@
         android:layout_height="17dp"
         android:layout_marginStart="183dp"
         android:background="@drawable/ic_heart_onsecondary_inactive"
-        android:contentDescription="@string/description_like"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/card_dot"
         app:layout_constraintTop_toTopOf="parent" />
@@ -66,7 +83,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="254dp"
         android:background="@drawable/ic_profile"
-        android:contentDescription="@string/description_profile"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/card_dot"
         app:layout_constraintTop_toTopOf="parent" />

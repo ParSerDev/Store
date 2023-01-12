@@ -1,8 +1,9 @@
 package com.parserdev.store.data.repository.details
 
+import com.parserdev.store.data.mapper.details.SmartphoneDetailsMapperImpl
 import com.parserdev.store.data.network.NetworkInstance
 import com.parserdev.store.data.utils.safeApiCall
-import com.parserdev.store.domain.models.details.PhoneDetails
+import com.parserdev.store.domain.models.details.SmartphoneDetails
 import com.parserdev.store.domain.network.NetworkResult
 import javax.inject.Inject
 
@@ -10,16 +11,9 @@ class DetailsRepositoryImpl @Inject constructor(
     private val networkInstance: NetworkInstance
 ) : DetailsRepository {
 
-    override suspend fun getPhoneDetails(id: Int): NetworkResult<PhoneDetails?> {
-        return when (val networkResult =
-            safeApiCall { networkInstance.detailsService.getPhoneDetailsDto(url = PHONE_DETAILS_URL) }) {
-            is NetworkResult.Success -> NetworkResult.Success(data = networkResult.data?.mapToDomainModel())
-            is NetworkResult.Error -> NetworkResult.Error(
-                message = networkResult.message,
-                data = networkResult.data?.mapToDomainModel()
-            )
-            is NetworkResult.Loading -> NetworkResult.Loading(data = networkResult.data?.mapToDomainModel())
-        }
+    override suspend fun getPhoneDetails(id: Int): NetworkResult<SmartphoneDetails?> {
+        return safeApiCall(apiToBeCalled = { networkInstance.detailsService.getPhoneDetailsDto(url = PHONE_DETAILS_URL) },
+            mapper = { dto -> SmartphoneDetailsMapperImpl().toSmartphoneDetailsModel(dto) })
     }
 
 }

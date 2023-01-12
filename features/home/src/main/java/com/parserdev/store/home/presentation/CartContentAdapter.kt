@@ -1,4 +1,4 @@
-package com.parserdev.store.cart
+package com.parserdev.store.home.presentation
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,8 +6,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.parserdev.store.cart.databinding.ItemCartBinding
 import com.parserdev.store.domain.models.cart.CartItem
+import com.parserdev.store.home.databinding.ItemCartBinding
 import java.text.NumberFormat
 import java.util.*
 
@@ -57,7 +57,6 @@ class CartContentAdapter(
                 Glide.with(imagePicture.context).load(cartItems[position]?.images)
                     .centerCrop()
                     .into(imagePicture)
-
                 val format: NumberFormat = NumberFormat.getCurrencyInstance()
                 format.maximumFractionDigits = 2
                 format.currency = Currency.getInstance("USD")

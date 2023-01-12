@@ -1,12 +1,10 @@
 package com.parserdev.store.home.presentation
 
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.AbstractSavedStateViewModelFactory
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.savedstate.SavedStateRegistryOwner
-import com.parserdev.store.data.repository.cart.CartRepositoryImpl
+import com.parserdev.store.data.repository.home.CartRepositoryImpl
 import com.parserdev.store.data.repository.home.HomeRepositoryImpl
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
@@ -21,7 +19,7 @@ class HomeViewModelFactory @AssistedInject constructor(
         key: String,
         modelClass: Class<T>,
         handle: SavedStateHandle
-    ): T = HomeViewModel(homeRepository, handle) as T
+    ): T = HomeViewModel(homeRepository, cartRepository, handle) as T
 }
 
 @AssistedFactory

@@ -4,8 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.parserdev.store.data.dto.details.SmartphonePurchaseDto
 import com.parserdev.store.data.repository.details.DetailsRepository
-import com.parserdev.store.domain.models.details.PhoneDetails
-import com.parserdev.store.domain.models.home.HomeCategory
+import com.parserdev.store.domain.models.details.SmartphoneDetails
 import com.parserdev.store.domain.network.NetworkResult
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -17,9 +16,9 @@ class SmartphoneViewModel @Inject constructor(
 
     var purchase = SmartphonePurchaseDto()
     val accept: (SmartphoneAction) -> Unit
-    private val _smartphoneDetails: MutableStateFlow<NetworkResult<PhoneDetails?>> =
+    private val _smartphoneDetails: MutableStateFlow<NetworkResult<SmartphoneDetails?>> =
         MutableStateFlow(NetworkResult.Loading())
-    val smartphoneDetails: StateFlow<NetworkResult<PhoneDetails?>> = _smartphoneDetails
+    val smartphoneDetails: StateFlow<NetworkResult<SmartphoneDetails?>> = _smartphoneDetails
 
     init {
         viewModelScope.launch {

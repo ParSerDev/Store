@@ -8,7 +8,7 @@ import com.parserdev.store.domain.models.cart.CartContent
 data class CartContentDto(
 
     @field:SerializedName("basket")
-    val cartItemDtos: List<CartItemDto?>? = null,
+    val cartItemDtos: List<CartItemDto>? = null,
 
     @field:SerializedName("delivery")
     val delivery: String? = null,
@@ -18,13 +18,4 @@ data class CartContentDto(
 
     @field:SerializedName("id")
     val id: String? = null
-) {
-    fun mapToDomainModel() = CartContent(
-        cartItemDtos?.map { it?.mapToDomainModel() },
-        delivery, total, id
-    )
-
-    fun mapToCartItemsAmount() = CartItemsAmount(
-        cartItemDtos?.size
-    )
-}
+)

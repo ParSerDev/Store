@@ -8,7 +8,6 @@ import dagger.Module
 @Module(
     subcomponents = [
         HomeComponent::class,
-        CartComponent::class,
         SmartphoneComponent::class
     ]
 )

@@ -9,9 +9,4 @@ data class HomePageDto(
 
     @field:SerializedName("home_store")
     val homeStore: List<HotItemDto>? = null
-) {
-    fun mapToDomainModel() = HomePage(
-        bestSellers = bestSeller?.map { it.mapToDomainModel() },
-        hotItems = homeStore?.map { it.mapToDomainModel() }
-    )
-}
+)

@@ -20,8 +20,4 @@ data class CartItemDto(
 
     @field:SerializedName("amount")
     val amount: Int? = null
-) {
-    fun mapToDomainModel() = CartItem(
-        images, price, id, title, amount
-    )
-}
+)

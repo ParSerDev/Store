@@ -2,7 +2,7 @@ package com.parserdev.store.cart
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.parserdev.store.data.repository.cart.CartRepository
+import com.parserdev.store.data.repository.home.CartRepository
 import javax.inject.Inject
 
 class CartViewModelFactory @Inject constructor(

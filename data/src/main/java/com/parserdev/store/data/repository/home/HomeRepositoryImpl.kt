@@ -1,8 +1,8 @@
 package com.parserdev.store.data.repository.home
 
+import com.parserdev.store.data.mapper.home.HomeMapper
 import com.parserdev.store.data.network.NetworkInstance
 import com.parserdev.store.data.utils.safeApiCall
-import com.parserdev.store.domain.models.home.CartItemsAmount
 import com.parserdev.store.domain.models.home.HomeCategory
 import com.parserdev.store.domain.models.home.HomePage
 import com.parserdev.store.domain.network.NetworkResult
@@ -11,51 +11,23 @@ import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class HomeRepositoryImpl @Inject constructor(
-    private val networkInstance: NetworkInstance
+    private val networkInstance: NetworkInstance,
+    private val homeMapper: HomeMapper
 ) : HomeRepository {
 
     override suspend fun getHomePage(homeCategory: HomeCategory): Flow<NetworkResult<HomePage?>> {
-        val networkResult =
-            safeApiCall { networkInstance.homeService.getHomePageDto(url = PHONE_HOME_PAGE_URL) }
         return flow {
             when (homeCategory) {
-                HomeCategory.PHONES -> when (networkResult) {
-                    is NetworkResult.Success -> emit(
-                        NetworkResult.Success(
-                            data = networkResult.data?.mapToDomainModel()
-                        )
-                    )
-                    is NetworkResult.Error -> emit(
-                        NetworkResult.Error(
-                            message = networkResult.message
-                        )
-                    )
-                    is NetworkResult.Loading -> emit(NetworkResult.Loading(data = networkResult.data?.mapToDomainModel()))
-                }
+                HomeCategory.PHONES -> emit (safeApiCall(
+                    apiToBeCalled = { networkInstance.homeService.getHomePageDto(url = PHONE_HOME_PAGE_URL) },
+                    mapper = { dto -> homeMapper.toHomePageModel(dto) }
+                ))
                 HomeCategory.COMPUTERS -> emit(NetworkResult.Error(message = NO_DATA))
                 HomeCategory.HEALTH -> emit(NetworkResult.Error(message = NO_DATA))
                 HomeCategory.BOOKS -> emit(NetworkResult.Error(message = NO_DATA))
                 HomeCategory.TOOLS -> emit(NetworkResult.Error(message = NO_DATA))
             }
         }
-    }
-
-    override suspend fun getCartItemsAmount(): NetworkResult<CartItemsAmount?> {
-        val networkResult =
-            safeApiCall { networkInstance.cartService.getCartContentDto(url = PHONE_HOME_PAGE_URL) }
-        return when (networkResult) {
-            is NetworkResult.Success ->
-                NetworkResult.Success(
-                    data = networkResult.data?.mapToCartItemsAmount()
-                )
-            is NetworkResult.Error ->
-                NetworkResult.Error(
-                    message = networkResult.message
-                )
-
-            is NetworkResult.Loading -> NetworkResult.Loading(data = networkResult.data?.mapToCartItemsAmount())
-        }
-
     }
 
 }
