@@ -1,10 +1,8 @@
 package com.parserdev.store.di.app
 
 import android.app.Application
-import com.parserdev.store.cart.di.CartComponent
 import com.parserdev.store.di.component.AppComponent
 import com.parserdev.store.di.component.DaggerAppComponent
-import com.parserdev.store.cart.di.CartComponentProvider
 import com.parserdev.store.home.di.HomeComponent
 import com.parserdev.store.home.di.HomeComponentProvider
 import com.parserdev.store.smartphone.di.SmartphoneComponent
