@@ -56,13 +56,10 @@ dependencies {
     implementation libs.swiperefreshlayout
     implementation libs.dagger
     implementation libs.kotlinx.coroutines.core
+    implementation libs.viewpager2
+    implementation libs.glide
+    implementation libs.recyclerview
     kapt libs.dagger.compiler
-    implementation 'androidx.viewpager2:viewpager2:1.0.0'
-    kaptTest "androidx.databinding:databinding-compiler:7.3.1"
-    implementation 'com.github.bumptech.glide:glide:4.13.2'
-    implementation "androidx.recyclerview:recyclerview:1.2.1"
-    // For control over item selection of both touch and mouse driven selection
-    implementation "androidx.recyclerview:recyclerview-selection:1.1.0"
 
     //bundles
     implementation libs.bundles.coroutines

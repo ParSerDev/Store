@@ -5,7 +5,6 @@ import android.content.res.Resources
 import android.util.TypedValue
 import androidx.annotation.AttrRes
 import androidx.annotation.ColorInt
-import androidx.core.content.ContentProviderCompat.requireContext
 import java.text.NumberFormat
 import java.util.*
 

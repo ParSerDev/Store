@@ -57,9 +57,6 @@ dependencies {
     implementation libs.constraintlayout
     implementation libs.dagger
     kapt libs.dagger.compiler
-    implementation 'androidx.viewpager2:viewpager2:1.0.0'
-    kaptTest "androidx.databinding:databinding-compiler:7.3.1"
-    implementation 'androidx.core:core-splashscreen:1.0.0'
     //bundles
     implementation libs.bundles.navigation
 }
