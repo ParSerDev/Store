@@ -4,7 +4,6 @@ import android.content.Context
 import com.parserdev.store.data.di.modules.NetworkModule
 import com.parserdev.store.data.di.modules.RepositoryModule
 import com.parserdev.store.di.app.AppSubcomponents
-import com.parserdev.store.data.di.modules.MapperModule
 import com.parserdev.store.home.di.HomeComponent
 import com.parserdev.store.smartphone.di.SmartphoneComponent
 import dagger.BindsInstance
@@ -15,7 +14,6 @@ import javax.inject.Singleton
 @Component(
     modules = [NetworkModule::class,
         RepositoryModule::class,
-        MapperModule::class,
         AppSubcomponents::class]
 )
 interface AppComponent {
