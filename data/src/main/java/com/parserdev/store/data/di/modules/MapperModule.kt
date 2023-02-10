@@ -7,6 +7,4 @@ import dagger.Module
 
 @Module
 abstract class MapperModule {
-    @Binds
-    abstract fun provideSmartphoneDetailsMapper(instance: SmartphoneDetailsMapperImpl): SmartphoneDetailsMapper
 }

@@ -5,7 +5,9 @@ import com.parserdev.store.smartphone.presentation.SmartphoneFragment
 import dagger.Subcomponent
 
 @SmartphoneScope
-@Subcomponent
+@Subcomponent(
+    modules = [SmartphoneModule::class]
+)
 interface SmartphoneComponent {
     @Subcomponent.Factory
     interface Factory {
