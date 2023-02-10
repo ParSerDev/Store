@@ -1,9 +1,9 @@
-package com.parserdev.store.data.mapper.home
+package com.parserdev.store.data.mapper.home.cart
 
-import com.parserdev.store.data.dto.cart.CartContentDto
-import com.parserdev.store.data.dto.cart.CartItemDto
-import com.parserdev.store.domain.models.cart.CartContent
-import com.parserdev.store.domain.models.cart.CartItem
+import com.parserdev.store.data.dto.home.cart.CartContentDto
+import com.parserdev.store.data.dto.home.cart.CartItemDto
+import com.parserdev.store.domain.models.home.cart.CartContent
+import com.parserdev.store.domain.models.home.cart.CartItem
 import javax.inject.Inject
 
 class CartMapperImpl @Inject constructor() : CartMapper {

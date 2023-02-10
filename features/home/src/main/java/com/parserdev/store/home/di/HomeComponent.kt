@@ -6,7 +6,9 @@ import com.parserdev.store.home.presentation.HomeFragment
 import dagger.Subcomponent
 
 @HomeScope
-@Subcomponent
+@Subcomponent(
+    modules =[HomeModule::class]
+)
 interface HomeComponent {
     @Subcomponent.Factory
     interface Factory {

@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.parserdev.store.domain.models.cart.CartItem
+import com.parserdev.store.domain.models.home.cart.CartItem
 import com.parserdev.store.domain.models.home.BestSellerItem
 import com.parserdev.store.home.databinding.ItemBestSellerBinding
 import com.parserdev.ui_components.R

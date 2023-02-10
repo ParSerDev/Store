@@ -3,9 +3,9 @@ package com.parserdev.store.home.presentation
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.parserdev.store.data.repository.home.CartRepository
+import com.parserdev.store.data.repository.home.cart.CartRepository
 import com.parserdev.store.data.repository.home.HomeRepository
-import com.parserdev.store.domain.models.cart.CartContent
+import com.parserdev.store.domain.models.home.cart.CartContent
 import com.parserdev.store.domain.models.home.HomeCategory
 import com.parserdev.store.domain.models.home.HomePage
 import com.parserdev.store.domain.network.NetworkResult
@@ -13,7 +13,6 @@ import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 class HomeViewModel @AssistedInject constructor(
     private val homeRepository: HomeRepository,

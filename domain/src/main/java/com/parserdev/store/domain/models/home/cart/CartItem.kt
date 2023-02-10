@@ -1,4 +1,4 @@
-package com.parserdev.store.domain.models.cart
+package com.parserdev.store.domain.models.home.cart
 
 data class CartItem(
 
