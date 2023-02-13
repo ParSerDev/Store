@@ -9,5 +9,5 @@ interface CartService {
     @GET("{url}")
     suspend fun getCartContentDto(
         @Path("url") url: String
-    ): Response<CartContentDto>
+    ): Response<CartContentDto?>
 }

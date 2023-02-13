@@ -9,5 +9,5 @@ interface DetailsService {
     @GET("{url}")
     suspend fun getPhoneDetailsDto(
         @Path("url") url: String
-    ): Response<SmartphoneDetailsDto>
+    ): Response<SmartphoneDetailsDto?>
 }

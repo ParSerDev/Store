@@ -1,5 +1,6 @@
 package com.parserdev.store.data.repository.home
 
+import com.parserdev.store.data.dto.home.HomePageDto
 import com.parserdev.store.data.mapper.home.HomeMapper
 import com.parserdev.store.data.network.NetworkInstance
 import com.parserdev.store.data.utils.safeApiCall
@@ -18,10 +19,10 @@ class HomeRepositoryImpl @Inject constructor(
     override suspend fun getHomePage(homeCategory: HomeCategory): Flow<NetworkResult<HomePage?>> {
         return flow {
             when (homeCategory) {
-                HomeCategory.PHONES -> emit (safeApiCall(
-                    apiToBeCalled = { networkInstance.homeService.getHomePageDto(url = PHONE_HOME_PAGE_URL) },
-                    mapper = { dto -> homeMapper.toHomePageModel(dto) }
-                ))
+                HomeCategory.PHONES -> emit(
+                    mapHomePage(dto = safeApiCall(
+                        apiToBeCalled = { networkInstance.homeService.getHomePageDto(url = PHONE_HOME_PAGE_URL) }
+                    )))
                 HomeCategory.COMPUTERS -> emit(NetworkResult.Error(message = NO_DATA))
                 HomeCategory.HEALTH -> emit(NetworkResult.Error(message = NO_DATA))
                 HomeCategory.BOOKS -> emit(NetworkResult.Error(message = NO_DATA))
@@ -29,6 +30,15 @@ class HomeRepositoryImpl @Inject constructor(
             }
         }
     }
+
+    private fun mapHomePage(dto: NetworkResult<HomePageDto?>): NetworkResult<HomePage?> {
+        return when (dto) {
+            is NetworkResult.Success -> NetworkResult.Success(homeMapper.toHomePageModel(homePageDto = dto.data!!))
+            is NetworkResult.Error -> NetworkResult.Error(message = dto.message)
+            is NetworkResult.Loading -> NetworkResult.Loading()
+        }
+    }
+
 
 }
 

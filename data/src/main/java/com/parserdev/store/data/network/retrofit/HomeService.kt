@@ -9,5 +9,5 @@ interface HomeService {
     @GET("{url}")
     suspend fun getHomePageDto(
         @Path("url") url: String
-    ): Response<HomePageDto>
+    ): Response<HomePageDto?>
 }

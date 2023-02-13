@@ -1,9 +1,12 @@
 package com.parserdev.store.data.repository.home
 
+import com.parserdev.store.data.dto.cart.CartContentDto
+import com.parserdev.store.data.dto.home.HomePageDto
 import com.parserdev.store.data.mapper.home.CartMapper
 import com.parserdev.store.data.network.NetworkInstance
 import com.parserdev.store.data.utils.safeApiCall
 import com.parserdev.store.domain.models.cart.CartContent
+import com.parserdev.store.domain.models.home.HomePage
 import com.parserdev.store.domain.network.NetworkResult
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -17,10 +20,21 @@ class CartRepositoryImpl @Inject constructor(
     override suspend fun getCartContent(): Flow<NetworkResult<CartContent?>> {
         return flow {
             emit(
-                safeApiCall(
-                    apiToBeCalled = { networkInstance.cartService.getCartContentDto(url = CART_CONTENT_URL) },
-                    mapper = { dto -> cartMapper.toCartContentModel(dto) })
+                mapCartContent(dto = safeApiCall(
+                    apiToBeCalled = { networkInstance.cartService.getCartContentDto(url = CART_CONTENT_URL) }
+                )))
+        }
+    }
+
+    private fun mapCartContent(dto: NetworkResult<CartContentDto?>): NetworkResult<CartContent?> {
+        return when (dto) {
+            is NetworkResult.Success -> NetworkResult.Success(
+                cartMapper.toCartContentModel(
+                    cartContentDto = dto.data!!
+                )
             )
+            is NetworkResult.Error -> NetworkResult.Error(message = dto.message)
+            is NetworkResult.Loading -> NetworkResult.Loading()
         }
     }
 

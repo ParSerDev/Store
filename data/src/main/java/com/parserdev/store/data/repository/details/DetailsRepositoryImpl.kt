@@ -1,19 +1,39 @@
 package com.parserdev.store.data.repository.details
 
+import com.parserdev.store.data.dto.cart.CartContentDto
+import com.parserdev.store.data.dto.details.SmartphoneDetailsDto
+import com.parserdev.store.data.mapper.details.SmartphoneDetailsMapper
 import com.parserdev.store.data.mapper.details.SmartphoneDetailsMapperImpl
 import com.parserdev.store.data.network.NetworkInstance
 import com.parserdev.store.data.utils.safeApiCall
+import com.parserdev.store.domain.models.cart.CartContent
 import com.parserdev.store.domain.models.details.SmartphoneDetails
 import com.parserdev.store.domain.network.NetworkResult
 import javax.inject.Inject
 
 class DetailsRepositoryImpl @Inject constructor(
-    private val networkInstance: NetworkInstance
+    private val networkInstance: NetworkInstance,
+    private val smartphoneDetailsMapper: SmartphoneDetailsMapper
 ) : DetailsRepository {
 
     override suspend fun getPhoneDetails(id: Int): NetworkResult<SmartphoneDetails?> {
-        return safeApiCall(apiToBeCalled = { networkInstance.detailsService.getPhoneDetailsDto(url = PHONE_DETAILS_URL) },
-            mapper = { dto -> SmartphoneDetailsMapperImpl().toSmartphoneDetailsModel(dto) })
+        return mapPhoneDetails(dto = safeApiCall(apiToBeCalled = {
+            networkInstance.detailsService.getPhoneDetailsDto(
+                url = PHONE_DETAILS_URL
+            )
+        }))
+    }
+
+    private fun mapPhoneDetails(dto: NetworkResult<SmartphoneDetailsDto?>): NetworkResult<SmartphoneDetails?> {
+        return when (dto) {
+            is NetworkResult.Success -> NetworkResult.Success(
+                smartphoneDetailsMapper.toSmartphoneDetailsModel(
+                    smartphoneDetailsDto = dto.data!!
+                )
+            )
+            is NetworkResult.Error -> NetworkResult.Error(message = dto.message)
+            is NetworkResult.Loading -> NetworkResult.Loading()
+        }
     }
 
 }
