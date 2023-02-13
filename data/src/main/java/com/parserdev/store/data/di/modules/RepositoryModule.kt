@@ -1,7 +1,7 @@
 package com.parserdev.store.data.di.modules
 
-import com.parserdev.store.data.repository.home.cart.CartRepository
-import com.parserdev.store.data.repository.home.cart.CartRepositoryImpl
+import com.parserdev.store.data.repository.home.CartRepository
+import com.parserdev.store.data.repository.home.CartRepositoryImpl
 import com.parserdev.store.data.repository.details.DetailsRepository
 import com.parserdev.store.data.repository.details.DetailsRepositoryImpl
 import com.parserdev.store.data.repository.home.HomeRepository

@@ -17,7 +17,7 @@ import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.ListPreloader
 import com.bumptech.glide.RequestBuilder
-import com.parserdev.store.domain.models.home.cart.CartItem
+import com.parserdev.store.domain.models.cart.CartItem
 import com.parserdev.store.domain.network.NetworkResult
 import com.parserdev.store.home.R
 import com.parserdev.store.home.databinding.FragmentCartBinding

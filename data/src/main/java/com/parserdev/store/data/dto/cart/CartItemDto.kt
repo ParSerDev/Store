@@ -1,8 +1,8 @@
-package com.parserdev.store.data.dto.home.cart
+package com.parserdev.store.data.dto.cart
 
 import com.google.gson.annotations.SerializedName
 import com.parserdev.store.domain.models.home.BestSellerItem
-import com.parserdev.store.domain.models.home.cart.CartItem
+import com.parserdev.store.domain.models.cart.CartItem
 
 data class CartItemDto(
 
