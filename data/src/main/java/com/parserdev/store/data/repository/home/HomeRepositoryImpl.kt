@@ -1,6 +1,7 @@
 package com.parserdev.store.data.repository.home
 
 import com.parserdev.store.data.dto.home.HomePageDto
+import com.parserdev.store.data.mapper.Mapper
 import com.parserdev.store.data.mapper.home.HomeMapper
 import com.parserdev.store.data.network.NetworkInstance
 import com.parserdev.store.data.utils.safeApiCall
@@ -13,7 +14,7 @@ import javax.inject.Inject
 
 class HomeRepositoryImpl @Inject constructor(
     private val networkInstance: NetworkInstance,
-    private val homeMapper: HomeMapper
+    private val homeMapper: Mapper<HomePageDto, HomePage>
 ) : HomeRepository {
 
     override suspend fun getHomePage(homeCategory: HomeCategory): Flow<NetworkResult<HomePage?>> {
@@ -33,7 +34,7 @@ class HomeRepositoryImpl @Inject constructor(
 
     private fun mapHomePage(dto: NetworkResult<HomePageDto?>): NetworkResult<HomePage?> {
         return when (dto) {
-            is NetworkResult.Success -> NetworkResult.Success(homeMapper.toHomePageModel(homePageDto = dto.data!!))
+            is NetworkResult.Success -> NetworkResult.Success(homeMapper.map(dto = dto.data!!))
             is NetworkResult.Error -> NetworkResult.Error(message = dto.message)
             is NetworkResult.Loading -> NetworkResult.Loading()
         }

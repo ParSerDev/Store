@@ -25,4 +25,5 @@ open class App : Application(), HomeComponentProvider,
     override fun provideSmartphoneComponent(): SmartphoneComponent {
         return appComponent.smartphoneComponent().create()
     }
+
 }
