@@ -29,9 +29,7 @@ interface AppComponent {
     interface Factory {
         fun create(@BindsInstance context: Context): AppComponent
     }
-    fun homeMapper(): Mapper<HomePageDto, HomePage>
-    fun cartMapper(): Mapper<CartContentDto, CartContent>
-    fun smartphoneDetailsMapper(): Mapper<SmartphoneDetailsDto, SmartphoneDetails>
+
     fun homeComponent(): HomeComponent.Factory
     fun smartphoneComponent(): SmartphoneComponent.Factory
 }
