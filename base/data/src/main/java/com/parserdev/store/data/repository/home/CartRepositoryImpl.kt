@@ -2,7 +2,6 @@ package com.parserdev.store.data.repository.home
 
 import com.parserdev.store.data.dto.cart.CartContentDto
 import com.parserdev.store.data.mapper.Mapper
-import com.parserdev.store.data.mapper.home.CartMapper
 import com.parserdev.store.data.network.NetworkInstance
 import com.parserdev.store.data.utils.safeApiCall
 import com.parserdev.store.domain.models.cart.CartContent

@@ -46,11 +46,10 @@ android {
 
 dependencies {
     //project
-    implementation project(':data')
+    implementation project(':domain')
     implementation project(':features:home')
     implementation project(':features:details:smartphone')
-    implementation project(':base:ui-components')
-    implementation project(':domain')
+    implementation project(':base:data')
     //libraries
     implementation libs.core.ktx
     implementation libs.core.splashscreen

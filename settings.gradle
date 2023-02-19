@@ -15,7 +15,7 @@ dependencyResolutionManagement {
 rootProject.name = "Store"
 include ':app'
 include ':features:home'
-include ':data'
+include ':base:data'
 include ':base:ui-components'
 include ':domain'
 include ':features:details:smartphone'

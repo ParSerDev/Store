@@ -1,8 +1,5 @@
 package com.parserdev.store.home.di
 
-import com.parserdev.store.data.di.modules.MapperModule
-import com.parserdev.store.data.di.modules.NetworkModule
-import com.parserdev.store.data.di.modules.RepositoryModule
 import com.parserdev.store.data.dto.cart.CartContentDto
 import com.parserdev.store.data.dto.home.HomePageDto
 import com.parserdev.store.data.mapper.Mapper

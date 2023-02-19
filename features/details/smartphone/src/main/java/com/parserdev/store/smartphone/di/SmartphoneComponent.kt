@@ -1,8 +1,5 @@
 package com.parserdev.store.smartphone.di
 
-import com.parserdev.store.data.di.modules.MapperModule
-import com.parserdev.store.data.di.modules.NetworkModule
-import com.parserdev.store.data.di.modules.RepositoryModule
 import com.parserdev.store.data.dto.details.SmartphoneDetailsDto
 import com.parserdev.store.data.mapper.Mapper
 import com.parserdev.store.domain.models.details.SmartphoneDetails

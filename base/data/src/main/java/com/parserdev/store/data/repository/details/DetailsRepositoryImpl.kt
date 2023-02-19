@@ -2,7 +2,6 @@ package com.parserdev.store.data.repository.details
 
 import com.parserdev.store.data.dto.details.SmartphoneDetailsDto
 import com.parserdev.store.data.mapper.Mapper
-import com.parserdev.store.data.mapper.details.SmartphoneDetailsMapper
 import com.parserdev.store.data.network.NetworkInstance
 import com.parserdev.store.data.utils.safeApiCall
 import com.parserdev.store.domain.models.details.SmartphoneDetails
