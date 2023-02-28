@@ -7,8 +7,10 @@ import com.parserdev.store.data.utils.safeApiCall
 import com.parserdev.store.domain.models.home.HomeCategory
 import com.parserdev.store.domain.models.home.HomePage
 import com.parserdev.store.domain.network.NetworkResult
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 import javax.inject.Inject
 
 class HomeRepositoryImpl @Inject constructor(
@@ -28,7 +30,7 @@ class HomeRepositoryImpl @Inject constructor(
                 HomeCategory.BOOKS -> emit(NetworkResult.Error(message = NO_DATA))
                 HomeCategory.TOOLS -> emit(NetworkResult.Error(message = NO_DATA))
             }
-        }
+        }.flowOn(Dispatchers.IO)
     }
 
     private fun mapHomePage(dto: NetworkResult<HomePageDto?>): NetworkResult<HomePage?> {

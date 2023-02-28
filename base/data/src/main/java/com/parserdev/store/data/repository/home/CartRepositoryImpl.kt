@@ -6,8 +6,10 @@ import com.parserdev.store.data.network.NetworkInstance
 import com.parserdev.store.data.utils.safeApiCall
 import com.parserdev.store.domain.models.cart.CartContent
 import com.parserdev.store.domain.network.NetworkResult
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 import javax.inject.Inject
 
 class CartRepositoryImpl @Inject constructor(
@@ -21,7 +23,7 @@ class CartRepositoryImpl @Inject constructor(
                 mapCartContent(dto = safeApiCall(
                     apiToBeCalled = { networkInstance.cartService.getCartContentDto(url = CART_CONTENT_URL) }
                 )))
-        }
+        }.flowOn(Dispatchers.IO)
     }
 
     private fun mapCartContent(dto: NetworkResult<CartContentDto?>): NetworkResult<CartContent?> {
